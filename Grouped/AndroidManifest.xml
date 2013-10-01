@@ -38,6 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.groupe.MainActivity" />
         </activity>
+        <activity android:name=".CreateNewGroupActivity"/>
     </application>
 
 </manifest>

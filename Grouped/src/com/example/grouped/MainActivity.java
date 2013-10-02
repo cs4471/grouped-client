@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
     //Called when the Get GROUPED! button is pressed
     public void openEditGroupPage(View view) {
     	Intent intent = new Intent(this, DisplayMessageActivity.class);
+        intent = new Intent(this, CreateNewGroupActivity.class);
     	startActivity(intent);
     	//Do something in response to button
     }

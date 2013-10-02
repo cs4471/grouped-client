@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Grouped.iml" filepath="$PROJECT_DIR$/Grouped.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../volley/tests/tests.iml" filepath="$PROJECT_DIR$/../volley/tests/tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../volley/volley.iml" filepath="$PROJECT_DIR$/../volley/volley.iml" />
     </modules>
   </component>
 </project>

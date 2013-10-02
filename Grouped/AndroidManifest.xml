@@ -8,6 +8,8 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -31,6 +33,12 @@
                 android:value="com.example.grouped.MainActivity" />
         </activity>
         <activity
+            android:name="com.example.grouped.CreateNewGroupActivity"
+            android:label="Create A New Group"
+            android:parentActivityName="com.example.grouped.MainActivity">
+
+        </activity>
+        <activity
             android:name="com.example.grouped.ConfirmationPageActivity"
             android:label="@string/title_activity_confirmation_page"
             android:parentActivityName="com.example.groupe.MainActivity" >
@@ -38,7 +46,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.groupe.MainActivity" />
         </activity>
-        <activity android:name=".CreateNewGroupActivity"/>
     </application>
 
 </manifest>

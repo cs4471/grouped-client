@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class DisplayMessageActivity extends Activity {
@@ -52,9 +53,9 @@ public class DisplayMessageActivity extends Activity {
 	}
 
 	public void createGroup(View view){
-		Intent intent = new Intent(this, ConfirmationPageActivity.class);
-	    String message = "CONFIRMED";
-	    intent.putExtra(EXTRA_MESSAGE, message);
+		Intent intent = new Intent(this, CreateNewGroupActivity.class);
+	    EditText nameInput = (EditText)findViewById(R.id.GroupNameInput);;
+	    intent.putExtra("group_name", nameInput.getText().toString());
 	    startActivity(intent);
 	}
 }

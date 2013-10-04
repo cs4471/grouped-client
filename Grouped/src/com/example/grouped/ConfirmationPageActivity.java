@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.grouped.database.Group;
+import com.example.grouped.database.GroupedData;
+
 public class ConfirmationPageActivity extends Activity {
 
 	@SuppressLint("NewApi")
@@ -18,17 +21,23 @@ public class ConfirmationPageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
 
-		    // Get the message from the intent
-		    Intent intent = getIntent();
-		    String message = intent.getStringExtra(DisplayMessageActivity.EXTRA_MESSAGE);
+        // Get the message from the intent
+        Intent intent = getIntent();
+        //String message = intent.getStringExtra(DisplayMessageActivity.EXTRA_MESSAGE);
 
-		    // Create the text view
-		    TextView textView = new TextView(this);
-		    textView.setTextSize(40);
-		    textView.setText(message);
+        // Create the text view
+        TextView textView = new TextView(this);
+        textView.setTextSize(15);
+        //textView.setText(message);
+        Group test = Group.getInstance();
 
-		    // Set the text view as the activity layout
-		    setContentView(textView);
+        String groupName = test.getName();
+        Long groupId = test.getId();
+
+        textView.setText("Name:" + groupName + ", Id:" + groupId);
+
+        // Set the text view as the activity layout
+        setContentView(textView);
 	}
 
 	/**

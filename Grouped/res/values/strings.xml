@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_display_message">Edit Group Page</string>
     <string name="title_activity_confirmation_page">Confirmation Page</string>
+    <string name="database_button">Stored Groups</string>
+    <string name="base_url">http://thimmig2-box-11673.use1.actionbox.io:3000</string>
 
 </resources>

@@ -1,18 +1,15 @@
-package com.example.grouped;
+package com.example.grouped.network;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.toolbox.*;
 import com.android.volley.Response;
 
 import org.json.JSONObject;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.net.URLEncoder;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * Created by Sebastian on 10/2/13.
+ * A volley request customized to take parameters that it will insert into the url.
  */
 public class GroupedRequest extends JsonObjectRequest {
 
@@ -28,7 +25,7 @@ public class GroupedRequest extends JsonObjectRequest {
         String url = super.getUrl() + "?";
 
         for(String key : this.params.keySet()) {
-            url += key + "=" + this.params.get(key) + "&";
+            url += key + "=" + URLEncoder.encode(this.params.get(key)) + "&";
         }
 
         return url;

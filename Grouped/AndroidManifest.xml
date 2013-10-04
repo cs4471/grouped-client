@@ -41,11 +41,9 @@
         <activity
             android:name="com.example.grouped.ConfirmationPageActivity"
             android:label="@string/title_activity_confirmation_page"
-            android:parentActivityName="com.example.groupe.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.groupe.MainActivity" />
+            android:parentActivityName="com.example.group.MainActivity" >
         </activity>
+        <activity android:name="com.example.grouped.TestDatabaseActivity"/>
     </application>
 
 </manifest>

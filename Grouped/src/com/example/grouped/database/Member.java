@@ -1,4 +1,4 @@
-package com.example.grouped;
+package com.example.grouped.database;
 
 import java.util.ArrayList;
 
@@ -7,13 +7,22 @@ import java.util.ArrayList;
  */
 public class Member {
 
+    private long id;
     private String nickname;
     private String lat, lng, certainty;
-    private String updatedAt;
+    private String timestamp;
     private ArrayList<Message> messages;
 
     public Member() {
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNickname() {
@@ -48,12 +57,12 @@ public class Member {
         this.certainty = certainty;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public ArrayList<Message> getMessages() {

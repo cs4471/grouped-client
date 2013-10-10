@@ -32,16 +32,37 @@ public class DisplayMessageActivity extends Activity {
 
 
 	public void onClick(View view){
-		showSimplePopUp();
+		switch(view.getId()) {
+		case(R.id.NameButton):
+			showSimplePopUp("Name", R.id.NameButton, R.id.NameButtonCheck);
+		break;
+		case(R.id.EventButton):
+			showSimplePopUp("Event", R.id.EventButton, R.id.EventButtonCheck);
+		break;
+		case(R.id.TimeButton):
+			showSimplePopUp("Time", R.id.TimeButton, R.id.TimeButtonCheck);
+		break;
+		case(R.id.FenceButton):
+			showSimplePopUp("Fence", R.id.FenceButton, R.id.FenceButtonCheck);
+		break;
+		case(R.id.SumtinButton):
+			showSimplePopUp("Sumtin", R.id.SumtinButton, R.id.SumtinButtonCheck);
+		break;
+		case(R.id.ElseButton):
+			showSimplePopUp("Event", R.id.ElseButton, R.id.ElseButtonCheck);
+		break;
+		}	
 	}
 	
-	private void showSimplePopUp() {
+	private void showSimplePopUp(String attr, int buttonId, int checkId) {
+		final int button = buttonId;
+		final int check = checkId;
 
 		 AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
 		 final EditText nameInput = new EditText(this);
 		 
-		 helpBuilder.setTitle("Group Name");
-		 helpBuilder.setMessage("Enter a Name for your Group");
+		 helpBuilder.setTitle(attr);
+		 helpBuilder.setMessage("Enter a(n) " + attr + " for your Group");
 		 helpBuilder.setView(nameInput);
 		 
 		 helpBuilder.setNegativeButton("Mmm Nah",
@@ -58,8 +79,8 @@ public class DisplayMessageActivity extends Activity {
 		     Editable editable = nameInput.getText();
 		     String value = editable == null ? "": editable.toString();
 		     
-		     Button nameButton = (Button) findViewById(R.id.NameButton);
-		     ImageView nameCheck = (ImageView) findViewById(R.id.NameButtonCheck);
+		     Button nameButton = (Button) findViewById(button);
+		     ImageView nameCheck = (ImageView) findViewById(check);
 		     Drawable greenRing = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);
 		     nameButton.setBackground(greenRing);
 		     nameCheck.setVisibility(View.VISIBLE);

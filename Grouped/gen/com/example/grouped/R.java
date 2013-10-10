@@ -31,11 +31,21 @@ public final class R {
     public static final class id {
         public static final int CornersAlign=0x7f080002;
         public static final int CreateGroupCircle=0x7f080000;
+        public static final int ElseButton=0x7f08000e;
+        public static final int ElseButtonCheck=0x7f08000d;
+        public static final int EventButton=0x7f080006;
+        public static final int EventButtonCheck=0x7f080005;
+        public static final int FenceButton=0x7f08000a;
+        public static final int FenceButtonCheck=0x7f080009;
         public static final int NameButton=0x7f080004;
         public static final int NameButtonCheck=0x7f080003;
+        public static final int SumtinButton=0x7f08000c;
+        public static final int SumtinButtonCheck=0x7f08000b;
+        public static final int TimeButton=0x7f080008;
+        public static final int TimeButtonCheck=0x7f080007;
         public static final int TopBottomAlign=0x7f080001;
-        public static final int action_settings=0x7f080006;
-        public static final int button1=0x7f080005;
+        public static final int action_settings=0x7f080010;
+        public static final int button1=0x7f08000f;
     }
     public static final class layout {
         public static final int activity_confirmation_page=0x7f030000;

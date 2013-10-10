@@ -23,7 +23,8 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
-
+   
+      
      <ImageView
        	android:id="@+id/CornersAlign"
         android:layout_width="300dp"
@@ -32,8 +33,18 @@
         android:layout_centerVertical="true"
         android:src="@drawable/create_group_circle" />
 
+    <ImageView
+        android:id="@+id/NameButtonCheck"
+        android:layout_width="60dp"
+        android:layout_height="75dp"
+        android:layout_above="@+id/TopBottomAlign"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/checkmark"
+        android:visibility="invisible" />
+     
+     
     <Button
-        android:id="@+id/GroupNameButton"
+        android:id="@+id/NameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/TopBottomAlign"
@@ -41,7 +52,7 @@
         android:background="@drawable/attr_buttons_create_group_page"
         android:onClick="onClick"
         android:text="Name" />
-
+    
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,6 +61,8 @@
         android:background="@drawable/attr_buttons_create_group_page"
         android:text="Event"  />
 
+ 
+    
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,5 +94,6 @@
         android:layout_alignLeft="@+id/CornersAlign"
         android:background="@drawable/attr_buttons_create_group_page"
         android:text="Sumtin" />
+
 
 </RelativeLayout>

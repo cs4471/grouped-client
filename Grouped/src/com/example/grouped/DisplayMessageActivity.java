@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class DisplayMessageActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.grouped.MESSAGE";
@@ -57,9 +58,12 @@ public class DisplayMessageActivity extends Activity {
 		     Editable editable = nameInput.getText();
 		     String value = editable == null ? "": editable.toString();
 		     
-		     Button nameButton = (Button) findViewById(R.id.GroupNameButton);
-		     Drawable drawable = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);
-		     nameButton.setBackground(drawable);
+		     Button nameButton = (Button) findViewById(R.id.NameButton);
+		     ImageView nameCheck = (ImageView) findViewById(R.id.NameButtonCheck);
+		     Drawable greenRing = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);
+		     nameButton.setBackground(greenRing);
+		     nameCheck.setVisibility(View.VISIBLE);
+		     nameButton.setText("");
 		    }
 		 });
 

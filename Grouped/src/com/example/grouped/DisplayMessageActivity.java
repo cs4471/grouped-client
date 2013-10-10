@@ -1,15 +1,16 @@
 package com.example.grouped;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.view.MenuItem;
+import android.text.Editable;
+import android.view.Menu;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class DisplayMessageActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.grouped.MESSAGE";
@@ -19,42 +20,50 @@ public class DisplayMessageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_message);
-		// Show the Up button in the action bar.
-		setupActionBar();
-		Intent intent = getIntent();
 	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
+
+	public void onClick(View view){
+		showSimplePopUp();
+	}
+	
+	private void showSimplePopUp() {
+
+		 AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+		 final EditText nameInput = new EditText(this);
+		 
+		 helpBuilder.setTitle("Group Name");
+		 helpBuilder.setMessage("Enter a Name for your Group");
+		 helpBuilder.setView(nameInput);
+		 
+		 helpBuilder.setNegativeButton("Mmm Nah",
+				 new DialogInterface.OnClickListener() {
+			 
+			 public void onClick(DialogInterface dialog, int which) {
+				 //Just close dialog box
+			 }
+		 });
+		 helpBuilder.setPositiveButton("I Dig It",
+		   new DialogInterface.OnClickListener() {
+
+		    @SuppressLint("NewApi") public void onClick(DialogInterface dialog, int which) {
+		     Editable editable = nameInput.getText();
+		     String value = editable == null ? "": editable.toString();
+		     
+		     Button nameButton = (Button) findViewById(R.id.GroupNameButton);
+		     Drawable drawable = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);
+		     nameButton.setBackground(drawable);
+		    }
+		 });
+
+		 AlertDialog helpDialog = helpBuilder.create();
+		 helpDialog.show();
 		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	public void createGroup(View view){
-		Intent intent = new Intent(this, ConfirmationPageActivity.class);
-	    String message = "CONFIRMED";
-	    intent.putExtra(EXTRA_MESSAGE, message);
-	    startActivity(intent);
-	}
 }

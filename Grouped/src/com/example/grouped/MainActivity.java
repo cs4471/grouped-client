@@ -2,7 +2,9 @@ package com.example.grouped;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,13 +29,39 @@ public class MainActivity extends Activity {
 
     //Called when the Get GROUPED! button is pressed
     public void openEditGroupPage(View view) {
-    	Intent intent = new Intent(this, DisplayMessageActivity.class);
+    	final Intent intent = new Intent(this, DisplayMessageActivity.class);
     	BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     	if (!mBluetoothAdapter.isEnabled()) {
-    		mBluetoothAdapter.enable();
+    			 AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+    			 helpBuilder.setTitle("WHOA!");
+    			 helpBuilder.setMessage("Looks like your Bluetooth isn't enabled." +
+    			 						"\nWe need that on to connect your group." +
+    			 						"\nCan we turn that on please?");
+    			 helpBuilder.setPositiveButton("Ya, Sure",
+    			   new DialogInterface.OnClickListener() {
+
+    			    public void onClick(DialogInterface dialog, int which) {
+    			    	BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    		    		mBluetoothAdapter.enable();
+    		    		startActivity(intent);
+    			    }
+    			   });
+    			  helpBuilder.setNegativeButton("No Way José", 
+    				new DialogInterface.OnClickListener() {
+    					  
+    				  public void onClick(DialogInterface dialog, int which) {
+    					  //Do nothing but close the popup
+    				  }
+    			  });
+
+    			 // Remember, create doesn't show the dialog
+    			 AlertDialog helpDialog = helpBuilder.create();
+    			 helpDialog.show();
+    	} else {
+    		startActivity(intent);
     	}
-    	startActivity(intent);
-    	//Do something in response to button
     }
-    
+    	//Do something in response to button
 }
+    
+

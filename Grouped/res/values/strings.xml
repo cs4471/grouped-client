@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_display_message">Edit Group Page</string>
     <string name="title_activity_confirmation_page">Confirmation Page</string>
+    <string name="title_activity_option_select">OptionSelect</string>
+    <string name="create_group">Create Group</string>
+    <string name="dummy_content">GROUPED</string>
 
 </resources>

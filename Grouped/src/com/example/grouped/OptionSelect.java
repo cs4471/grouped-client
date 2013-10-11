@@ -1,6 +1,5 @@
 package com.example.grouped;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -9,27 +8,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
-public class MainActivity extends Activity {
+public class OptionSelect extends Activity {
 
-	@SuppressLint("NewApi")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_option_select);
+		// Show the Up button in the action bar.
+		
+		final ImageView logo = (ImageView) findViewById(R.id.logo);
+		final Animation animationRotateCenter = AnimationUtils.loadAnimation(this, R.anim.rotate_center);
+		logo.startAnimation(animationRotateCenter);
+	}
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    //Called when the Get GROUPED! button is pressed
-    public void openEditGroupPage(View view) {
-    	final Intent intent = new Intent(this, DisplayMessageActivity.class);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.option_select, menu);
+		return true;
+	}
+	
+	public void onClick(View view) {
+		final Intent intent = new Intent(this, CreateGroup.class);
     	BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     	if (!mBluetoothAdapter.isEnabled()) {
     			 AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
@@ -60,8 +64,9 @@ public class MainActivity extends Activity {
     	} else {
     		startActivity(intent);
     	}
-    }
-    	//Do something in response to button
-}
-    
+		
+	}
 
+
+
+}

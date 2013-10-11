@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ababab"
+    tools:context=".OptionSelect" >
+    
+<ImageView
+    android:id="@+id/logo"
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10dp"
+    android:src="@drawable/logo"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/logo"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="112dp"
+    android:gravity="center"
+    android:background="#ababab">
+
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ababab"
+        android:text="@string/dummy_content"
+        android:textColor="@color/plum_purple"
+        android:textSize="65sp"
+        android:textStyle="bold" />
+
+   </LinearLayout>
+    
+   
+      <LinearLayout
+            android:id="@+id/create_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_marginTop="50dp"
+            android:background="@color/plum_purple"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/create_group_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="#ababab"
+                android:text="@string/create_group"
+                android:textSize="25sp"
+                android:gravity="center_vertical|left|" 
+                android:textColor="@color/plum_purple"
+                android:onClick="onClick" />
+            
+            
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/join_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/create_group"
+            android:background="@color/plum_purple"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/join_group_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="#ababab"
+                android:text="Join Group"
+                android:textSize="25sp"
+                android:gravity="center_vertical|left|" 
+                android:textColor="@color/plum_purple"/>
+            
+            
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/view_groups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/join_group"
+            android:background="@color/plum_purple"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/view_groups_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="#ababab"
+                android:text="View Groups"
+                android:textSize="25sp"
+                android:gravity="center_vertical|left|" 
+                android:textColor="@color/plum_purple"/>
+            
+            
+        </LinearLayout>
+        
+
+
+</RelativeLayout>

@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#ababab"
+    android:background="@color/steel_grey"
     tools:context=".StartUp" >
 
     <Button
@@ -18,7 +18,7 @@
         android:background="@drawable/get_grouped_button"
         android:onClick="openEditGroupPage"
         android:text="Get\nGROUPED"
-        android:textColor="#ababab"
+        android:textColor="@color/steel_grey"
         android:textSize="50dp"
         android:textStyle="bold" />
 

@@ -5,9 +5,9 @@
 
    <stroke
        android:width="5pt"
-       android:color="#309f0f"/>
+       android:color="@color/confirmation_green"/>
    <solid
-       android:color="#00000000"/>
+       android:color="@color/transparent"/>
    
    <size 
        android:width="75dp"

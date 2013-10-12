@@ -23,7 +23,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class color {
         public static final int black_overlay=0x7f050000;
+        public static final int confirmation_green=0x7f050003;
         public static final int plum_purple=0x7f050001;
+        public static final int steel_grey=0x7f050002;
+        public static final int transparent=0x7f050004;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 

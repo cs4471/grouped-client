@@ -9,5 +9,6 @@
     <string name="title_activity_option_select">OptionSelect</string>
     <string name="create_group">Create Group</string>
     <string name="dummy_content">GROUPED</string>
+    <string name="title_activity_set_geo_fence">SetGeoFenceActivity</string>
 
 </resources>

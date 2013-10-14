@@ -78,13 +78,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_confirmation_page=0x7f030000;
         public static final int activity_create_group=0x7f030001;
         public static final int activity_option_select=0x7f030002;
-        public static final int activity_startup=0x7f030003;
+        public static final int activity_set_geo_fence=0x7f030003;
+        public static final int activity_startup=0x7f030004;
     }
     public static final class menu {
         public static final int confirmation_page=0x7f090000;
         public static final int create_group=0x7f090001;
         public static final int option_select=0x7f090002;
-        public static final int startup=0x7f090003;
+        public static final int set_geo_fence=0x7f090003;
+        public static final int startup=0x7f090004;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
@@ -95,6 +97,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_activity_confirmation_page=0x7f070004;
         public static final int title_activity_display_message=0x7f070003;
         public static final int title_activity_option_select=0x7f070005;
+        public static final int title_activity_set_geo_fence=0x7f070008;
     }
     public static final class style {
         /** 

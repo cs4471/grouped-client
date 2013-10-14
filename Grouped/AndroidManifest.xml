@@ -42,11 +42,19 @@
         </activity>
         <activity
             android:name="com.example.grouped.OptionSelect"
-            android:parentActivityName="com.example.grouped.StartUp"
-            android:configChanges="orientation|keyboardHidden|screenSize" >
-             <meta-data
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName="com.example.grouped.StartUp" >
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grouped.StartUp" />
+        </activity>
+        <activity
+            android:name="com.example.grouped.SetGeoFenceActivity"
+            android:label="@string/title_activity_set_geo_fence"
+            android:parentActivityName="CreateGroup" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="CreateGroup" />
         </activity>
     </application>
 

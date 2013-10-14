@@ -19,6 +19,9 @@ public class StartUp extends Activity {
         setContentView(R.layout.activity_startup);
     }
 
+	protected void onResume(Bundle savedInstanceState) {
+		
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

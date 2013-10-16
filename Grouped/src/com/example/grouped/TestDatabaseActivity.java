@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.grouped.database.Group;
+import com.example.grouped.models.Group;
 import com.example.grouped.database.GroupedData;
 
 import java.util.List;

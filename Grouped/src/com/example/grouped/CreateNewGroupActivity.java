@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import com.android.volley.*;
 import com.android.volley.toolbox.*;
-import com.example.grouped.database.Group;
+import com.example.grouped.models.Group;
 import com.example.grouped.database.GroupedData;
 import com.example.grouped.network.GroupedRequest;
 import com.google.gson.Gson;

@@ -1,4 +1,4 @@
-package com.example.grouped.database;
+package com.example.grouped.models;
 
 import java.util.ArrayList;
 

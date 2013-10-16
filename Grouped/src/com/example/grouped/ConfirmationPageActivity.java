@@ -11,8 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.grouped.database.Group;
-import com.example.grouped.database.GroupedData;
+import com.example.grouped.models.Group;
 
 public class ConfirmationPageActivity extends Activity {
 

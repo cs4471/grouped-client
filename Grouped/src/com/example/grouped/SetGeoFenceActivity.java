@@ -1,64 +1,89 @@
 package com.example.grouped;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+ 
 
-public class SetGeoFenceActivity extends Activity {
+public class SetGeoFenceActivity extends Activity implements OnInfoWindowClickListener {
+ 
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_set_geo_fence);
-		CameraPosition INIT =
-				new CameraPosition.Builder()
-				.target(new LatLng(lat, lon))
-				.zoom( 17.5F )
-				.bearing( 300F) // orientation
-				.tilt( 50F) // viewing angle
-				.build();
-				// use GooggleMap mMap to move camera into position
-				mMap.animateCamera( CameraUpdateFactory.newCameraPosition(INIT) )
-		// Show the Up button in the action bar.
-		setupActionBar();
-	}
+   private LatLng defaultLatLng = new LatLng(39.233956, -77.484703);
+   private GoogleMap map;
+   private int zoomLevel = 7;
+  
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-	}
+  @TargetApi(Build.VERSION_CODES.HONEYCOMB) 
+  @SuppressLint("NewApi") 
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_set_geo_fence);
+ 
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.set_geo_fence, menu);
-		return true;
-	}
+    try {
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+        if (map!=null){
+           map.getUiSettings().setCompassEnabled(true);
+           map.setTrafficEnabled(true);
+           map.setMyLocationEnabled(true);
+ 
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+           // Move the camera instantly to defaultLatLng.
+           map.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, zoomLevel));
+ 
+
+           map.addMarker(new MarkerOptions().position(defaultLatLng)
+                .title("This is the title")
+                .snippet("This is the snippet within the InfoWindow")
+                .icon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.checkmark)));
+ 
+
+           map.setOnInfoWindowClickListener(this);
+ 
+
+         }
+ 
+
+     }catch (NullPointerException e) {
+         e.printStackTrace();
+     }
+ 
+
+  }
+ 
+
+   @Override
+   public void onPause() {
+                if (map != null){
+                                map.setMyLocationEnabled(false);
+                                map.setTrafficEnabled(false);
+                }
+                super.onPause();
+   }
+
+ 
+
+   @Override
+   public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(this, SetGeoFenceActivity.class);
+                intent.putExtra("snippet", marker.getSnippet());
+                intent.putExtra("title", marker.getTitle());
+                intent.putExtra("position", marker.getPosition());
+                startActivity(intent);
+   }
+ 
 
 }

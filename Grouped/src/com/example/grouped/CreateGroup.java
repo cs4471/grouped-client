@@ -4,17 +4,20 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 public class CreateGroup extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.grouped.MESSAGE";
+	public int fieldsCompleted = 0;
 		
 	@SuppressLint("NewApi")
 	@Override
@@ -43,7 +46,9 @@ public class CreateGroup extends Activity {
 			showSimplePopUp("Time", R.id.TimeButton, R.id.TimeButtonCheck);
 		break;
 		case(R.id.FenceButton):
-			showSimplePopUp("Fence", R.id.FenceButton, R.id.FenceButtonCheck);
+			final Intent intent = new Intent(this, SetGeoFenceActivity.class);
+			startActivity(intent);
+			//showSimplePopUp("Time", R.id.FenceButton, R.id.FenceButtonCheck);
 		break;
 		case(R.id.SumtinButton):
 			showSimplePopUp("Sumtin", R.id.SumtinButton, R.id.SumtinButtonCheck);
@@ -74,8 +79,9 @@ public class CreateGroup extends Activity {
 		 });
 		 helpBuilder.setPositiveButton("I Dig It",
 		   new DialogInterface.OnClickListener() {
-
+			 
 		    @SuppressLint("NewApi") public void onClick(DialogInterface dialog, int which) {
+		     fieldsCompleted++;
 		     Editable editable = nameInput.getText();
 		     String value = editable == null ? "": editable.toString();
 		     //Here is where youd get the field. value holds the string content
@@ -83,12 +89,24 @@ public class CreateGroup extends Activity {
 		     ImageView nameCheck = (ImageView) findViewById(check);
 		     Drawable greenRing = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);
 		     nameButton.setBackground(greenRing);
+		     nameButton.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					//Do Nothing
+				}
+
+			});
 		     nameCheck.setVisibility(View.VISIBLE);
 		     nameButton.setText("");
+		     if (fieldsCompleted==6) {
+		    	 
+		     }
 		    }
 		 });
 
 		 AlertDialog helpDialog = helpBuilder.create();
 		 helpDialog.show();
+		 
 		}
 }

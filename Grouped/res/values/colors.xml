@@ -1,0 +1,9 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="plum_purple">#674ea7</color>
+    <color name="steel_grey">#ababab</color>
+    <color name="confirmation_green">#309f0f</color>
+    <color name="transparent">#00000000</color>
+
+</resources>

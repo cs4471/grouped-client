@@ -6,4 +6,6 @@
         <string name="action_settings">Action Settings</string>
         <string name="app_name">GROUPED</string>
         <string name="title_activity_set_geo_fence">Set GeoFence</string>
-    </resources>
+        <string name="database_button">Stored Groups</string>
+        <string name="base_url">http://thimmig2-box-11673.use1.actionbox.io:3000</string>
+</resources>

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.example.grouped.R;
 
 
-
 public class ConfirmationPageActivity extends Activity {
 
 	
@@ -43,10 +42,15 @@ public class ConfirmationPageActivity extends Activity {
 
 		    textView.setText(message);
 
+		    /*Group test = Group.getInstance();
+	        String groupName = test.getName();
+	        Long groupId = test.getId();
+	        textView.setText("Name:" + groupName + ", Id:" + groupId);*/
 
 		    // Set the text view as the activity layout
 
 		    setContentView(textView);
+
 	}
 
 

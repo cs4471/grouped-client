@@ -34,7 +34,12 @@ public class StartUp extends Activity {
     	final Intent intent = new Intent(this, OptionSelect.class);
     		startActivity(intent);
     }
-    	//Do something in response to button
+
+    public void openStoredGroupsPage(View view) {
+        Intent intent = new Intent(this, TestDatabaseActivity.class);
+        startActivity(intent);
+    }
+    
 }
     
 

@@ -12,6 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.grouped.R;
+
 public class OptionSelect extends Activity {
 
 	@Override

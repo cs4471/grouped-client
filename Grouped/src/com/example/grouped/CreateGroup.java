@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.grouped.R;
+
 public class CreateGroup extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.grouped.MESSAGE";
 	public int fieldsCompleted = 0;

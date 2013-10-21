@@ -13,12 +13,18 @@ public class GroupTable {
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_KEY = "crypt_key";
+    public static final String COLUMN_EVENT = "event";
+    public static final String COLUMN_LENGTH = "length";
+    public static final String COLUMN_ROAM = "roam";
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
             + TABLE_NAME + "("
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_NAME + " text not null, "
+            + COLUMN_EVENT + " text, "
+            + COLUMN_LENGTH + " integer, "
+            + COLUMN_ROAM + " integer, "
             + COLUMN_KEY + " text not null);";
 
     public static void onCreate(SQLiteDatabase database) {
@@ -35,7 +41,7 @@ public class GroupTable {
     }
 
     public static String[] allColumns() {
-        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_KEY};
+        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_EVENT, COLUMN_LENGTH, COLUMN_ROAM, COLUMN_KEY};
         return columns;
     }
 }

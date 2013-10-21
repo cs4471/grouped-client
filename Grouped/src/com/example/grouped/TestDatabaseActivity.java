@@ -14,13 +14,11 @@ import java.util.List;
  */
 public class TestDatabaseActivity extends Activity {
 
-    private GroupedData datasource;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.database_test);
 
-        datasource = new GroupedData(this);
+        GroupedData datasource = GroupedData.getGroupedDataInstance(this);
         datasource.open();
         List<Group> groups = datasource.getGroups();
         datasource.close();

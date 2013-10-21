@@ -9,27 +9,47 @@ import java.util.ArrayList;
  */
 public class Group {
 
-    @Expose
-    private String key;
+    private String key = null;
 
     @Expose
-    private String name;
+    private String name = null;
 
     @Expose
-    private long id;
+    private String event = null;
 
-    private ArrayList<Member> members;
+    @Expose
+    private Integer length = null;
 
-    // singleton instance
-    private static Group groupInstance = null;
+    @Expose
+    private Integer roam = null;
 
+    @Expose
+    private Long id = null;
 
-    public static void setGroupInstance(Group groupInstance) {
-        Group.groupInstance = groupInstance;
+    private ArrayList<Member> members = null;
+
+    public Integer getLength() {
+        return length;
     }
 
-    public static Group getInstance() {
-        return Group.groupInstance;
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public Integer getRoam() {
+        return roam;
+    }
+
+    public void setRoam(Integer roam) {
+        this.roam = roam;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
     }
 
     public String getKey() {
@@ -49,14 +69,19 @@ public class Group {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-
+    public void merge(Group addAttributesFrom) {
+        if(this.getName() == null) this.setName(addAttributesFrom.getName());
+        if(this.getRoam() == null) this.setRoam(addAttributesFrom.getRoam());
+        if(this.getLength() == null) this.setLength(addAttributesFrom.getLength());
+        if(this.getEvent() == null) this.setEvent(addAttributesFrom.getEvent());
+    }
 
 }

@@ -52,7 +52,7 @@ public class OptionSelect extends Activity {
     		    		startActivity(intent);
     			    }
     			   });
-    			  helpBuilder.setNegativeButton("No Way José", 
+    			  helpBuilder.setNegativeButton("No Way Jose",
     				new DialogInterface.OnClickListener() {
     					  
     				  public void onClick(DialogInterface dialog, int which) {
@@ -68,6 +68,12 @@ public class OptionSelect extends Activity {
     	}
 		
 	}
+
+    public void openStoredGroupsPage(View view) {
+        //Intent intent = new Intent(this, TestDatabaseActivity.class);
+        Intent intent = new Intent(this, CreateNewGroupActivity.class);
+        startActivity(intent);
+    }
 
 
 

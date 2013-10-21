@@ -9,8 +9,8 @@ public class Member {
 
     private long id;
     private String nickname;
-    private String lat, lng, certainty;
-    private String timestamp;
+    private float lat, lng, certainty;
+    private int lastCheckin;
     private ArrayList<Message> messages;
 
     public Member() {
@@ -33,36 +33,36 @@ public class Member {
         this.nickname = nickname;
     }
 
-    public String getLat() {
+    public int getLastCheckin() {
+        return lastCheckin;
+    }
+
+    public void setLastCheckin(int lastCheckin) {
+        this.lastCheckin = lastCheckin;
+    }
+
+    public float getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(float lat) {
         this.lat = lat;
     }
 
-    public String getLng() {
+    public float getLng() {
         return lng;
     }
 
-    public void setLng(String lng) {
+    public void setLng(float lng) {
         this.lng = lng;
     }
 
-    public String getCertainty() {
+    public float getCertainty() {
         return certainty;
     }
 
-    public void setCertainty(String certainty) {
+    public void setCertainty(float certainty) {
         this.certainty = certainty;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
     }
 
     public ArrayList<Message> getMessages() {

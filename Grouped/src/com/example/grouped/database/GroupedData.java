@@ -16,12 +16,21 @@ import java.util.List;
  */
 public class GroupedData {
 
+    private static GroupedData instance = null;
+
     // Database fields
     private SQLiteDatabase database;
     private GroupedDatabaseHelper dbHelper;
 
-    public GroupedData(Context context) {
+    private GroupedData(Context context) {
         dbHelper = new GroupedDatabaseHelper(context);
+    }
+
+    public static GroupedData getGroupedDataInstance(Context context) {
+        if(GroupedData.instance == null) {
+            GroupedData.instance = new GroupedData(context);
+        }
+        return GroupedData.instance;
     }
 
     public void open() throws SQLException {
@@ -36,8 +45,12 @@ public class GroupedData {
         ContentValues values = new ContentValues();
 
         values.put(GroupTable.COLUMN_ID, group.getId());
-        values.put(GroupTable.COLUMN_NAME, group.getName());
-        values.put(GroupTable.COLUMN_KEY, group.getKey());
+        if(group.getName() != null) values.put(GroupTable.COLUMN_NAME, group.getName());
+        if(group.getEvent() != null) values.put(GroupTable.COLUMN_EVENT, group.getEvent());
+        if(group.getLength() != null) values.put(GroupTable.COLUMN_LENGTH, group.getLength());
+        if(group.getRoam() != null) values.put(GroupTable.COLUMN_ROAM, group.getRoam());
+        if(group.getKey() != null) values.put(GroupTable.COLUMN_KEY, group.getKey());
+
 
         long insertId = database.insert(GroupTable.TABLE_NAME, null,
                 values);
@@ -75,6 +88,9 @@ public class GroupedData {
         Group group = new Group();
         group.setId(cursor.getLong(cursor.getColumnIndex(GroupTable.COLUMN_ID)));
         group.setName(cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_NAME)));
+        group.setEvent(cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_EVENT)));
+        group.setLength(cursor.getInt(cursor.getColumnIndex(GroupTable.COLUMN_LENGTH)));
+        group.setRoam(cursor.getInt(cursor.getColumnIndex(GroupTable.COLUMN_ROAM)));
         group.setKey(cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_KEY)));
         return group;
     }

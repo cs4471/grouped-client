@@ -82,33 +82,29 @@ public class CreateGroup extends Activity {
 		 helpBuilder.setPositiveButton("I Dig It",
 		   new DialogInterface.OnClickListener() {
 			 
-		    @SuppressLint("NewApi") public void onClick(DialogInterface dialog, int which) {
-		     fieldsCompleted++;
-		     Editable editable = nameInput.getText();
-		     String value = editable == null ? "": editable.toString();
-		     //Here is where youd get the field. value holds the string content
-		     Button nameButton = (Button) findViewById(button);
-		     ImageView nameCheck = (ImageView) findViewById(check);
-		     Drawable greenRing = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);
-		     nameButton.setBackground(greenRing);
-		     nameButton.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					//Do Nothing
+			 @SuppressLint("NewApi") public void onClick(DialogInterface dialog, int which) {
+				 fieldsCompleted++;
+			 	Editable editable = nameInput.getText();
+			 	String value = editable == null ? "": editable.toString();
+			 	//Here is where youd get the field. value holds the string content
+			 	Button nameButton = (Button) findViewById(button);
+			 	ImageView nameCheck = (ImageView) findViewById(check);
+			 	Drawable greenRing = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);
+			 	nameButton.setBackground(greenRing);
+			 	nameButton.setOnClickListener(new OnClickListener() {		
+			 		@Override
+			 		public void onClick(View v) {
+			 			//Do Nothing
+			 		}
+			 	});
+			 	nameCheck.setVisibility(View.VISIBLE);
+				nameButton.setText("");
+				if (fieldsCompleted==6) {
+			 						
 				}
-
-			});
-		     nameCheck.setVisibility(View.VISIBLE);
-		     nameButton.setText("");
-		     if (fieldsCompleted==6) {
-		    	 
-		     }
-		    }
+			 }	
 		 });
-
 		 AlertDialog helpDialog = helpBuilder.create();
 		 helpDialog.show();
-		 
-		}
+	}
 }

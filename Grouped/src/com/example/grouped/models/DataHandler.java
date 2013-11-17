@@ -43,12 +43,12 @@ public class DataHandler {
 
     public void checkin(Member update, final Response.Listener<Integer> dhResponse) {
         databaseHelper.updateMember(update);
-        networkHelper.updateMember(update, new Response.Listener<Integer>() {
-            @Override
-            public void onResponse(Integer status) {
-                dhResponse.onResponse(status);
-            }
-        });
+//        networkHelper.updateMember(update, new Response.Listener<Integer>() {
+//            @Override
+//            public void onResponse(Integer status) {
+//                dhResponse.onResponse(status);
+//            }
+//        });
     }
 
 

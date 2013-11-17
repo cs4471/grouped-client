@@ -44,10 +44,10 @@ public class GroupedData {
     }
 
     public boolean updateMember(Member member) {
-        Cursor cursor = database.query(MemberTable.TABLE_NAME, new String[]{MemberTable.COLUMN_ID}, "id=?", new String[]{member.getId().toString()}, null, null, null);
+        Cursor cursor = database.query(MemberTable.TABLE_NAME, new String[]{MemberTable.COLUMN_ID}, "_id=?", new String[]{member.getId().toString()}, null, null, null);
 
         if(cursor.getCount() > 0) {
-            if(database.update(MemberTable.TABLE_NAME, member.toDataRow(), "id=?", new String[]{member.getId().toString()}) > 0) {
+            if(database.update(MemberTable.TABLE_NAME, member.toDataRow(), "_id=?", new String[]{member.getId().toString()}) > 0) {
                 return true;
             } else {
                 return false;
@@ -93,7 +93,7 @@ public class GroupedData {
         }
     }
 
-    public void deleteGroup(int id) {
+    public void deleteGroup(Long id) {
         database.delete(GroupTable.TABLE_NAME, GroupTable.COLUMN_ID
                 + " = " + id, null);
     }
@@ -117,7 +117,7 @@ public class GroupedData {
     }
 
     public Group getGroup(Long id) {
-        Cursor cursor = database.query(GroupTable.TABLE_NAME, new String[]{GroupTable.COLUMN_ID}, "id=?", new String[]{id.toString()}, null, null, null);
+        Cursor cursor = database.query(GroupTable.TABLE_NAME, GroupTable.allColumns(), "_id=?", new String[]{id.toString()}, null, null, null);
         cursor.moveToFirst();
         Group group = new Group();
         group.fromCursor(cursor);

@@ -7,7 +7,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.grouped.models.Group;
+import com.example.grouped.models.Member;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,19 +43,48 @@ public class GroupedData {
         dbHelper.close();
     }
 
+    public boolean updateMember(Member member) {
+        Cursor cursor = database.query(MemberTable.TABLE_NAME, new String[]{MemberTable.COLUMN_ID}, "id=?", new String[]{member.getId().toString()}, null, null, null);
+
+        if(cursor.getCount() > 0) {
+            if(database.update(MemberTable.TABLE_NAME, member.toDataRow(), "id=?", new String[]{member.getId().toString()}) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            if(database.insert(MemberTable.TABLE_NAME, null,
+                    member.toDataRow()) == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public List<Member> getMembers(Long groupID) {
+        List<Member> members = new ArrayList();
+
+        Cursor cursor = database.query(MemberTable.TABLE_NAME,
+                MemberTable.allColumns(), null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Member member = new Member();
+            member.fromCursor(cursor);
+            members.add(member);
+            cursor.moveToNext();
+        }
+        // Make sure to close the cursor
+        cursor.close();
+        return members;
+    }
+
+
     public boolean storeGroup(Group group) {
-        ContentValues values = new ContentValues();
-
-        values.put(GroupTable.COLUMN_ID, group.getId());
-        if(group.getName() != null) values.put(GroupTable.COLUMN_NAME, group.getName());
-        if(group.getEvent() != null) values.put(GroupTable.COLUMN_EVENT, group.getEvent());
-        if(group.getLength() != null) values.put(GroupTable.COLUMN_LENGTH, group.getLength());
-        if(group.getRoam() != null) values.put(GroupTable.COLUMN_ROAM, group.getRoam());
-        if(group.getKey() != null) values.put(GroupTable.COLUMN_KEY, group.getKey());
-
-
         long insertId = database.insert(GroupTable.TABLE_NAME, null,
-                values);
+                group.toDataRow());
 
         if(insertId != -1) {
             return true;
@@ -75,7 +106,8 @@ public class GroupedData {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Group group = cursorToGroup(cursor);
+            Group group = new Group();
+            group.fromCursor(cursor);
             groups.add(group);
             cursor.moveToNext();
         }
@@ -84,14 +116,13 @@ public class GroupedData {
         return groups;
     }
 
-    private Group cursorToGroup(Cursor cursor) {
+    public Group getGroup(Long id) {
+        Cursor cursor = database.query(GroupTable.TABLE_NAME, new String[]{GroupTable.COLUMN_ID}, "id=?", new String[]{id.toString()}, null, null, null);
+        cursor.moveToFirst();
         Group group = new Group();
-        group.setId(cursor.getLong(cursor.getColumnIndex(GroupTable.COLUMN_ID)));
-        group.setName(cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_NAME)));
-        group.setEvent(cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_EVENT)));
-        group.setLength(cursor.getInt(cursor.getColumnIndex(GroupTable.COLUMN_LENGTH)));
-        group.setRoam(cursor.getInt(cursor.getColumnIndex(GroupTable.COLUMN_ROAM)));
-        group.setKey(cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_KEY)));
+        group.fromCursor(cursor);
+        cursor.close();
         return group;
     }
+
 }

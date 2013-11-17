@@ -1,5 +1,9 @@
 package com.example.grouped.models;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import com.example.grouped.database.GroupTable;
 import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
@@ -18,29 +22,29 @@ public class Group {
     private String event = null;
 
     @Expose
-    private Integer length = null;
+    private String length = null;
 
     @Expose
-    private Integer roam = null;
+    private String roam = null;
 
     @Expose
     private Long id = null;
 
     private ArrayList<Member> members = null;
 
-    public Integer getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(Integer length) {
+    public void setLength(String length) {
         this.length = length;
     }
 
-    public Integer getRoam() {
+    public String getRoam() {
         return roam;
     }
 
-    public void setRoam(Integer roam) {
+    public void setRoam(String roam) {
         this.roam = roam;
     }
 
@@ -82,6 +86,28 @@ public class Group {
         if(this.getRoam() == null) this.setRoam(addAttributesFrom.getRoam());
         if(this.getLength() == null) this.setLength(addAttributesFrom.getLength());
         if(this.getEvent() == null) this.setEvent(addAttributesFrom.getEvent());
+    }
+
+    public ContentValues toDataRow() {
+        ContentValues values = new ContentValues();
+
+        values.put(GroupTable.COLUMN_ID, this.id);
+        if(this.name != null) values.put(GroupTable.COLUMN_NAME, this.name);
+        if(this.event != null) values.put(GroupTable.COLUMN_EVENT, this.event);
+        if(this.length != null) values.put(GroupTable.COLUMN_LENGTH, this.length);
+        if(this.roam != null) values.put(GroupTable.COLUMN_ROAM, this.roam);
+        if(this.key != null) values.put(GroupTable.COLUMN_KEY, this.key);
+
+        return values;
+    }
+
+    public void fromCursor(Cursor cursor) {
+        this.id = cursor.getLong(cursor.getColumnIndex(GroupTable.COLUMN_ID));
+        this.name = cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_NAME));
+        this.event = (cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_EVENT)));
+        this.length = (cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_LENGTH)));
+        this.roam = (cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_ROAM)));
+        this.key = (cursor.getString(cursor.getColumnIndex(GroupTable.COLUMN_KEY)));
     }
 
 }

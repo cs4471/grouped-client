@@ -34,7 +34,7 @@ public class StartUp extends Activity {
     	final Intent intent = new Intent(this, OptionSelect.class);
     		startActivity(intent);
     }
-    	//Do something in response to button
+    
 }
     
 

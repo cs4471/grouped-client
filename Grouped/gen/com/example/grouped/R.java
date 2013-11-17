@@ -223,19 +223,22 @@ containing a value of this type.
         public static final int TimeButton=0x7f06000d;
         public static final int TimeButtonCheck=0x7f06000c;
         public static final int TopBottomAlign=0x7f060006;
-        public static final int action_settings=0x7f06001e;
+        public static final int action_settings=0x7f060021;
         public static final int create_group=0x7f060016;
         public static final int create_group_button=0x7f060017;
-        public static final int frame=0x7f06001c;
+        public static final int frame=0x7f06001e;
         public static final int fullscreen_content=0x7f060015;
         public static final int hybrid=0x7f060004;
         public static final int join_group=0x7f060018;
         public static final int join_group_button=0x7f060019;
         public static final int logo=0x7f060014;
-        public static final int map=0x7f06001d;
+        public static final int map=0x7f06001f;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
+        public static final int pager=0x7f06001c;
+        public static final int pager_title_strip=0x7f06001d;
         public static final int satellite=0x7f060002;
+        public static final int section_label=0x7f060020;
         public static final int terrain=0x7f060003;
         public static final int view_groups=0x7f06001a;
         public static final int view_groups_button=0x7f06001b;
@@ -244,8 +247,11 @@ containing a value of this type.
         public static final int activity_confirmation_page=0x7f030000;
         public static final int activity_create_group=0x7f030001;
         public static final int activity_option_select=0x7f030002;
-        public static final int activity_set_geo_fence=0x7f030003;
-        public static final int activity_startup=0x7f030004;
+        public static final int activity_startup=0x7f030003;
+        public static final int activity_view_current_group=0x7f030004;
+        public static final int fragment_map=0x7f030005;
+        public static final int fragment_message_board=0x7f030006;
+        public static final int fragment_view_members=0x7f030007;
     }
     public static final class menu {
         public static final int confirmation_page=0x7f0a0000;
@@ -253,6 +259,7 @@ containing a value of this type.
         public static final int option_select=0x7f0a0002;
         public static final int set_geo_fence=0x7f0a0003;
         public static final int startup=0x7f0a0004;
+        public static final int view_current_group=0x7f0a0005;
     }
     public static final class string {
         public static final int action_settings=0x7f07001b;
@@ -349,7 +356,11 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f070012;
         public static final int create_group=0x7f07001a;
         public static final int hello_world=0x7f070019;
+        public static final int message_board_title=0x7f07001f;
         public static final int title_activity_set_geo_fence=0x7f07001d;
+        public static final int title_activity_view_current_group=0x7f07001e;
+        public static final int view_map_title=0x7f070020;
+        public static final int view_members_title=0x7f070021;
     }
     public static final class style {
         /** 

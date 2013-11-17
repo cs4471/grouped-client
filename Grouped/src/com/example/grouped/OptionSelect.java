@@ -34,7 +34,7 @@ public class OptionSelect extends Activity {
 		return true;
 	}
 	
-	public void onClick(View view) {
+	public void launchCreateGroup(View view) {
 		final Intent intent = new Intent(this, CreateGroup.class);
     	BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     	if (!mBluetoothAdapter.isEnabled()) {
@@ -67,6 +67,11 @@ public class OptionSelect extends Activity {
     		startActivity(intent);
     	}
 		
+	}
+	
+	public void launchViewCurrentGroup(View view) {
+		Intent intent = new Intent(this, ViewCurrentGroup.class);
+		startActivity(intent);
 	}
 
 

@@ -48,9 +48,7 @@ public class CreateGroup extends Activity {
 			showSimplePopUp("Time", R.id.TimeButton, R.id.TimeButtonCheck);
 		break;
 		case(R.id.FenceButton):
-			final Intent intent = new Intent(this, SetGeoFenceActivity.class);
-			startActivity(intent);
-			//showSimplePopUp("Time", R.id.FenceButton, R.id.FenceButtonCheck);
+			showSimplePopUp("Fence", R.id.FenceButton, R.id.FenceButtonCheck);
 		break;
 		case(R.id.SumtinButton):
 			showSimplePopUp("Sumtin", R.id.SumtinButton, R.id.SumtinButtonCheck);

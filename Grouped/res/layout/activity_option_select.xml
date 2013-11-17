@@ -58,7 +58,7 @@
                 android:textSize="25sp"
                 android:gravity="center_vertical|left|" 
                 android:textColor="@color/plum_purple"
-                android:onClick="onClick" />
+                android:onClick="launchCreateGroup" />
             
             
         </LinearLayout>
@@ -105,10 +105,11 @@
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:background="@color/steel_grey"
-                android:text="View Groups"
+                android:text="View Current Group"
                 android:textSize="25sp"
                 android:gravity="center_vertical|left|" 
-                android:textColor="@color/plum_purple"/>
+                android:textColor="@color/plum_purple"
+                android:onClick="launchViewCurrentGroup"/>
             
             
         </LinearLayout>

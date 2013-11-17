@@ -82,12 +82,102 @@ public class GroupedNetworkData {
     }
 
 
-    public void joinGroup(Group groupToJoin, final Response.Listener<Boolean> response) {
+    public void joinGroup(Group groupToJoin, final Response.Listener<Group> response) {
         String url = BASEURL + "/groups/join";
+        JSONObject params = null;
+
+        try {
+            // turn the group info provided into a json object
+            params = new JSONObject(new Gson().toJson(groupToJoin));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject serverResponse) {
+                // parse the parameters returned into a Group.java object
+                Group test = new Gson().fromJson(serverResponse.toString(), Group.class);
+
+                // call the listener passed with the constructed object
+                response.onResponse(test);
+
+                Log.i("Network Grouped Data", serverResponse.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Network Grouped Data", error.getMessage().toString());
+            }
+        });
+
+        // fire our request
+        GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-    public void destroyGroup(Group groupToDestroy, final Response.Listener<Boolean> response){
+    public void destroyGroup(Group groupToDestroy, final Response.Listener<Group> response){
         String url = BASEURL + "/groups/delete";
+        JSONObject params = null;
+
+        try {
+            // turn the group info provided into a json object
+            params = new JSONObject(new Gson().toJson(groupToDestroy));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject serverResponse) {
+                // parse the parameters returned into a Group.java object
+                Group test = new Gson().fromJson(serverResponse.toString(), Group.class);
+
+                // call the listener passed with the constructed object
+                response.onResponse(test);
+
+                Log.i("Network Grouped Data", serverResponse.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Network Grouped Data", error.getMessage().toString());
+            }
+        });
+
+        // fire our request
+        GroupedNetworkData.queue.add(jsObjRequest);
     }
 
+    public void checkin(Group groupToDestroy, final Response.Listener<Group> response){
+        String url = BASEURL + "/groups/delete";
+        JSONObject params = null;
+
+        try {
+            // turn the group info provided into a json object
+            params = new JSONObject(new Gson().toJson(groupToDestroy));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject serverResponse) {
+                // parse the parameters returned into a Group.java object
+                Group test = new Gson().fromJson(serverResponse.toString(), Group.class);
+
+                // call the listener passed with the constructed object
+                response.onResponse(test);
+
+                Log.i("Network Grouped Data", serverResponse.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Network Grouped Data", error.getMessage().toString());
+            }
+        });
+
+        // fire our request
+        GroupedNetworkData.queue.add(jsObjRequest);
+    }
 }

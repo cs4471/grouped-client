@@ -12,6 +12,7 @@ public class Member {
     private float lat, lng, certainty;
     private int lastCheckin;
     private ArrayList<Message> messages;
+    private boolean me;
 
     public Member() {
 

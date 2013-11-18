@@ -30,8 +30,16 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+     
+     <ImageView
+         android:id="@+id/create_button"
+         android:layout_width="100dp"
+         android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/create_group_circle" />
+        android:src="@drawable/create_group_circle"
+        android:onClick="launchConfirmationPage"/>
    
    <ImageView
         android:layout_width="wrap_content"

@@ -34,6 +34,11 @@ public class CreateGroup extends Activity {
         getMenuInflater().inflate(R.menu.create_group, menu);
         return true;
     }
+    
+    public void launchConfirmationPage(View view) {
+    	Intent intent = new Intent(this, ConfirmationPageActivity.class);
+    	startActivity(intent);
+    }
 
 
 	public void onClick(View view){

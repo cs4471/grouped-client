@@ -10,5 +10,6 @@
     <string name="message_board_title">Message Board</string>
     <string name="view_map_title">Map</string>
     <string name="view_members_title">Members</string>
+    <string name="title_activity_join_group">Join Group</string>
 
 </resources>

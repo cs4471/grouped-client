@@ -74,6 +74,9 @@ public class OptionSelect extends Activity {
 		startActivity(intent);
 	}
 
-
+	public void launchJoinGroup(View view){
+		Intent intent = new Intent(this, JoinGroup.class);
+		startActivity(intent);
+	}
 
 }

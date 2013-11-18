@@ -77,6 +77,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grouped.StartUp" />
         </activity>
+        <activity
+            android:name="com.example.grouped.JoinGroup"
+            android:label="@string/title_activity_join_group"
+            android:parentActivityName="com.example.grouped.OptionSelect" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.grouped.OptionSelect" />
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.grouped.network;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -200,32 +201,27 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-	public void checkinsGet(Group groupToCheckinWith, Member member, final Response.Listener<List<Member>> response){
+	public void checkinsGet(Group group, Integer lastCheckin, final Response.Listener<List<Member>> response){
 	    String url = BASEURL + "/checkins/get";
-	    JSONObject params = null;
+		Map<String, Integer> checkinsGetArgs = new HashMap();
+		checkinsGetArgs.put("group_id", group.getId().intValue());
+		checkinsGetArgs.put("checkin_id", lastCheckin);
+        url += toUrlParams(checkinsGetArgs);
 	
-	    // turn the group info provided into a json object
-		Map<String, Long> checkinsGetArgs = new HashMap<String, Long>();
-		checkinsGetArgs.put("group_id", groupToCheckinWith.getId());
-		checkinsGetArgs.put("checkin_id", (long) member.getLastCheckin());
-		params = new JSONObject(checkinsGetArgs);
-	
-	    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+	    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 	        @Override
 	        public void onResponse(JSONObject serverResponse) {
-	        	List<Member> membersList = new ArrayList<Member>();
-	        	if (serverResponse.has("checkins")){
-	        		Member[] members = new Gson().fromJson(serverResponse.toString(), Member[].class);
-	        		membersList.addAll(Arrays.asList(members));
-	
-	                // call the listener passed with the integer id
-	                response.onResponse(membersList);
-	        	}
-	        	else {
-	        		response.onResponse(null);
-	        	}
-	
-	            Log.i("Network Grouped Data", serverResponse.toString());
+                List<Member> membersList = new ArrayList<Member>();
+                Member[] members = new Member[0];
+                try {
+                    Log.v("grouped network", serverResponse.getJSONArray("checkins").toString());
+                    members = new Gson().fromJson(serverResponse.getJSONArray("checkins").toString(), Member[].class);
+                } catch (Exception e) {}
+
+                membersList.addAll(Arrays.asList(members));
+
+                // call the listener passed with the integer id
+                response.onResponse(membersList);
 	        }
 	    }, new Response.ErrorListener() {
 	        @Override
@@ -320,5 +316,13 @@ public class GroupedNetworkData {
 		
 			// fire our request
 			GroupedNetworkData.queue.add(jsObjRequest);
-		}
+	}
+
+    private String toUrlParams(Map<String, Integer> params) {
+        String paramString = "?";
+        for(Map.Entry<String, Integer> param : params.entrySet()) {
+            paramString += URLEncoder.encode(param.getKey()) + "=" + URLEncoder.encode(param.getValue().toString()) + "&";
+        }
+        return paramString;
+    }
 }

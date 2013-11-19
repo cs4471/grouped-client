@@ -7,6 +7,8 @@ import com.android.volley.Response;
 import com.example.grouped.database.GroupedData;
 import com.example.grouped.network.GroupedNetworkData;
 
+import java.util.List;
+
 /**
  * Created by Ethan on 11/17/13.
  */
@@ -42,8 +44,8 @@ public class DataHandler {
                 member.setId((long)memberId);
                 member.setGroupID((long) group.getId());
                 member.setMe(true);
-                databaseHelper.updateMember(member);
                 dhResponse.onResponse(member);
+                databaseHelper.updateMember(member);
             }
         });
     }
@@ -58,7 +60,35 @@ public class DataHandler {
         });
     }
 
+    public void getCheckins(final Group group, final Response.Listener<List<Member>> dhResponse) {
+        List<Member> members = databaseHelper.getMembers(group.getId());
+        dhResponse.onResponse(members);
 
+        int lastCheckin = -1;
+        long me = 0;
+        for(Member member : members) {
+            lastCheckin = Math.max(member.getLastCheckin(), lastCheckin);
+            if(member.isMe()) {
+                me = member.getId();
+            }
+        }
+
+        final long meId = me;
+
+        networkHelper.checkinsGet(group, lastCheckin, new Response.Listener<List<Member>>() {
+            @Override
+            public void onResponse(List<Member> members) {
+                dhResponse.onResponse(members);
+
+                for(Member member : members) {
+                    if(member.getId() != meId) {
+                        member.setGroupID(group.getId());
+                        databaseHelper.updateMember(member);
+                    }
+                }
+            }
+        });
+    }
 
     public static DataHandler getDataHandler(Context context) {
         if(singleton == null) {

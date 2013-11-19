@@ -27,9 +27,12 @@ public class StartUp extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+
         //testGroupedData();
         //testNetworkData();
-        testDataHandler();
+        //testDataHandler();
+        //testGetCheckins(new Group());
     }
 
 	protected void onResume(Bundle savedInstanceState) {
@@ -84,6 +87,19 @@ public class StartUp extends Activity {
             public void onResponse(Group group) {
                 Log.v("grouped DataHandler Create Group", group.toString());
                 testJoinGroup(group);
+            }
+        });
+    }
+
+    public void testGetCheckins(Group group) {
+        DataHandler dh = DataHandler.getDataHandler(getApplicationContext());
+        group.setId((long)1);
+        dh.getCheckins(group, new Response.Listener<List<Member>>() {
+            @Override
+            public void onResponse(List<Member> members) {
+                for(Member member : members) {
+                    Log.v("grouped DataHandler Pulled Update", member.toString());
+                }
             }
         });
     }

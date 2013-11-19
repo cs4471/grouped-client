@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.example.grouped.database.MemberTable;
+import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 
@@ -12,11 +13,22 @@ import java.util.ArrayList;
  */
 public class Member {
 
+    @Expose
     private long id, groupID;
+
+    @Expose
     private String nickname;
+
+    @Expose
     private String status;
+
+    @Expose
     private String lat, lng, certainty;
+
+    @Expose
     private int lastCheckin;
+
+    @Expose
     private ArrayList<Message> messages;
     private boolean me;
 

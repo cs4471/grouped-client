@@ -26,6 +26,12 @@ public class GroupedData {
 
     private GroupedData(Context context) {
         dbHelper = new GroupedDatabaseHelper(context);
+
+        // for debugging
+        this.open();
+        database.delete(GroupTable.TABLE_NAME, null, null);
+        database.delete(MemberTable.TABLE_NAME, null, null);
+        this.close();
     }
 
     public static GroupedData getGroupedDataInstance(Context context) {
@@ -35,39 +41,41 @@ public class GroupedData {
         return GroupedData.instance;
     }
 
-    public void open() throws SQLException {
+    private void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
     }
 
-    public void close() {
+    private void close() {
         dbHelper.close();
     }
 
     public boolean updateMember(Member member) {
+        boolean updated = false;
+
+        this.open();
         Cursor cursor = database.query(MemberTable.TABLE_NAME, new String[]{MemberTable.COLUMN_ID}, "_id=?", new String[]{member.getId().toString()}, null, null, null);
 
         if(cursor.getCount() > 0) {
             if(database.update(MemberTable.TABLE_NAME, member.toDataRow(), "_id=?", new String[]{member.getId().toString()}) > 0) {
-                return true;
-            } else {
-                return false;
+                updated = true;
             }
 
         } else {
             if(database.insert(MemberTable.TABLE_NAME, null,
                     member.toDataRow()) == -1) {
-                return false;
-            } else {
-                return true;
+                updated = false;
             }
         }
+
+        this.close();
+        return updated;
     }
 
     public List<Member> getMembers(Long groupID) {
         List<Member> members = new ArrayList();
 
-        Cursor cursor = database.query(MemberTable.TABLE_NAME,
-                MemberTable.allColumns(), null, null, null, null, null);
+        this.open();
+        Cursor cursor = database.query(MemberTable.TABLE_NAME, MemberTable.allColumns(), null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -78,14 +86,18 @@ public class GroupedData {
         }
         // Make sure to close the cursor
         cursor.close();
+        this.close();
         return members;
     }
 
 
     public boolean storeGroup(Group group) {
+        this.open();
         long insertId = database.insert(GroupTable.TABLE_NAME, null,
                 group.toDataRow());
+        group.setId(insertId);
 
+        this.close();
         if(insertId != -1) {
             return true;
         } else {
@@ -94,13 +106,16 @@ public class GroupedData {
     }
 
     public void deleteGroup(Long id) {
+        this.open();
         database.delete(GroupTable.TABLE_NAME, GroupTable.COLUMN_ID
                 + " = " + id, null);
+        this.close();
     }
 
     public List<Group> getGroups() {
         List<Group> groups = new ArrayList<Group>();
 
+        this.open();
         Cursor cursor = database.query(GroupTable.TABLE_NAME,
                 GroupTable.allColumns(), null, null, null, null, null);
 
@@ -113,15 +128,20 @@ public class GroupedData {
         }
         // Make sure to close the cursor
         cursor.close();
+        this.close();
         return groups;
     }
 
     public Group getGroup(Long id) {
+        this.open();
         Cursor cursor = database.query(GroupTable.TABLE_NAME, GroupTable.allColumns(), "_id=?", new String[]{id.toString()}, null, null, null);
+
         cursor.moveToFirst();
         Group group = new Group();
         group.fromCursor(cursor);
+
         cursor.close();
+        this.close();
         return group;
     }
 

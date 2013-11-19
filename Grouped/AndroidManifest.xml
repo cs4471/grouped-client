@@ -79,22 +79,6 @@
 
         <activity
 
-            android:name="com.example.grouped.CreateNewGroupActivity"
-
-            android:parentActivityName="com.example.grouped.StartUp" >
-
-        </activity>
-
-        <activity
-
-            android:name="com.example.grouped.TestDatabaseActivity"
-
-            android:parentActivityName="com.example.grouped.CreateNewGroupActivity" >
-
-        </activity>
-
-        <activity
-
             android:name="com.example.grouped.ConfirmationPageActivity"
 
             android:parentActivityName="com.example.grouped.OptionSelect" >

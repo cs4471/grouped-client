@@ -29,7 +29,7 @@ import org.json.JSONObject;
 public class GroupedNetworkData {
 	private static Integer ERROR = -1;
     private static GroupedNetworkData instance = null;
-    private static final String BASEURL = "http://thimmig2-box-11673.use1.actionbox.io:3000";
+    private static final String BASEURL = "http://thimmig2-box-11673.use1.actionbox.io";
 
     private static RequestQueue queue;
 
@@ -53,7 +53,7 @@ public class GroupedNetworkData {
             Response.Listener<Group> : will be called with the group after it is recieved from server
                 use this to update database or view
      */
-    public void createGroup(Group newGroupInfo, final Response.Listener<Integer> response){
+    public void createGroup(final Group newGroupInfo, final Response.Listener<Integer> response){
         String url = BASEURL + "/groups/new";
         JSONObject params = null;
 
@@ -68,17 +68,14 @@ public class GroupedNetworkData {
             @Override
             public void onResponse(JSONObject serverResponse) {
                 // integer id is guaranteed
-                Integer id = -1;
-				try {
-					id = serverResponse.getInt("id");
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
 
-                // call the listener passed with the integer id
-                response.onResponse(id);
-
-                Log.i("Network Grouped Data", serverResponse.toString());
+                try {
+                    if(serverResponse.has("id")) {
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else if(serverResponse.has("error")) {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+                } catch (Exception e) {}
             }
         }, new Response.ErrorListener() {
             @Override
@@ -107,21 +104,13 @@ public class GroupedNetworkData {
             @Override
             public void onResponse(JSONObject serverResponse) {
             	// test for error
-            	if (serverResponse.has("id")){
-            		Integer memberID = -1;
-					try {
-						memberID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-                    // call the listener passed with the integer id
-                    response.onResponse(memberID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
+            	try {
+                    if (serverResponse.has("id")){
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else if(serverResponse.has("error")) {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+            	} catch (Exception e) {}
 
                 Log.i("Network Grouped Data", serverResponse.toString());
             }
@@ -166,7 +155,6 @@ public class GroupedNetworkData {
             		response.onResponse(ERROR);
             	}
 
-                Log.i("Network Grouped Data", serverResponse.toString());
             }
         }, new Response.ErrorListener() {
             @Override
@@ -179,13 +167,13 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-    public void checkin(Group groupToDestroy, final Response.Listener<Integer> response){
+    public void checkin(Member me, final Response.Listener<Integer> response){
         String url = BASEURL + "/checkins/new";
         JSONObject params = null;
 
         try {
             // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(groupToDestroy));
+            params = new JSONObject(new Gson().toJson(me));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -193,23 +181,13 @@ public class GroupedNetworkData {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject serverResponse) {
-            	if (serverResponse.has("id")){
-            		Integer memberID = - 1;
-					try {
-						memberID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-                    // call the listener passed with the integer id
-                    response.onResponse(memberID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
-
-                Log.i("Network Grouped Data", serverResponse.toString());
+            	try {
+                    if(serverResponse.has("id")) {
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else if(serverResponse.has("error")) {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+            	} catch (Exception e) {}
             }
         }, new Response.ErrorListener() {
             @Override

@@ -129,4 +129,21 @@ public class Member {
         this.certainty = (cursor.getString(cursor.getColumnIndex(MemberTable.COLUMN_CERTAINTY)));
         this.me = (cursor.getInt(cursor.getColumnIndex(MemberTable.COLUMN_ME))) == 0 ? false : true;
     }
+
+    @Override
+    public String toString() {
+        String member = "";
+
+        member += "Member(" + id +
+                ") : group(" + groupID +
+                ") me = " + me;
+//                ") nickname = " + me +
+//                ") status = " + me +
+//                ") lat = " + me +
+//                ") lng = " + me +
+//                ") certainty = " + me +
+//                ") messages(" + messages.size() + ")";
+
+        return member;
+    }
 }

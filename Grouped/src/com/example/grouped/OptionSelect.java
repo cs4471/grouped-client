@@ -71,8 +71,8 @@ public class OptionSelect extends Activity {
 
     public void openStoredGroupsPage(View view) {
         //Intent intent = new Intent(this, TestDatabaseActivity.class);
-        Intent intent = new Intent(this, CreateNewGroupActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, CreateNewGroupActivity.class);
+        //startActivity(intent);
     }
 
 

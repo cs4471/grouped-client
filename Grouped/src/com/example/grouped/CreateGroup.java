@@ -42,25 +42,19 @@ public class CreateGroup extends Activity {
 
 
 	public void onClick(View view){
-		switch(view.getId()) {
-		case(R.id.NameButton):
+		int id = view.getId();
+		if (id == (R.id.NameButton)) {
 			showSimplePopUp("Name", R.id.NameButton, R.id.NameButtonCheck);
-		break;
-		case(R.id.EventButton):
+		} else if (id == (R.id.EventButton)) {
 			showSimplePopUp("Event", R.id.EventButton, R.id.EventButtonCheck);
-		break;
-		case(R.id.TimeButton):
+		} else if (id == (R.id.TimeButton)) {
 			showSimplePopUp("Time", R.id.TimeButton, R.id.TimeButtonCheck);
-		break;
-		case(R.id.FenceButton):
+		} else if (id == (R.id.FenceButton)) {
 			showSimplePopUp("Fence", R.id.FenceButton, R.id.FenceButtonCheck);
-		break;
-		case(R.id.SumtinButton):
+		} else if (id == (R.id.SumtinButton)) {
 			showSimplePopUp("Sumtin", R.id.SumtinButton, R.id.SumtinButtonCheck);
-		break;
-		case(R.id.ElseButton):
+		} else if (id == (R.id.ElseButton)) {
 			showSimplePopUp("Event", R.id.ElseButton, R.id.ElseButtonCheck);
-		break;
 		}	
 	}
 	

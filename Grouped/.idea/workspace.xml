@@ -58,6 +58,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
@@ -95,7 +96,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -105,27 +105,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="StartUp.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="StartUp.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/StartUp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+            <state line="31" column="0" selection-start="938" selection-end="938" vertical-scroll-proportion="-0.45394737" vertical-offset="325" max-vertical-offset="629">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataTester.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataTester.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/tests/DataTester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="8" selection-start="743" selection-end="743" vertical-scroll-proportion="-0.47619048" vertical-offset="476" max-vertical-offset="2669">
-              <folding>
-                <element signature="e#1129#1329#0" expanded="true" />
-                <element signature="e#1318#1319#0" expanded="true" />
-                <element signature="e#1362#1678#0" expanded="true" />
-                <element signature="e#1667#1668#0" expanded="true" />
-                <element signature="e#3059#3448#0" expanded="true" />
-                <element signature="e#3437#3438#0" expanded="true" />
-              </folding>
+            <state line="21" column="4" selection-start="548" selection-end="548" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2516">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,7 +126,7 @@
       <file leaf-file-name="MessageTable.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/database/MessageTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="35" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+            <state line="23" column="35" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="833">
               <folding />
             </state>
           </provider>
@@ -142,7 +135,7 @@
       <file leaf-file-name="MemberTable.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/database/MemberTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="53" selection-start="1790" selection-end="1804" vertical-scroll-proportion="0.0" vertical-offset="230" max-vertical-offset="986">
+            <state line="48" column="53" selection-start="1790" selection-end="1804" vertical-scroll-proportion="0.0" vertical-offset="695" max-vertical-offset="986">
               <folding />
             </state>
           </provider>
@@ -151,11 +144,8 @@
       <file leaf-file-name="GroupedData.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/database/GroupedData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="161" selection-start="2402" selection-end="2402" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3468">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4830#4837#0" expanded="true" />
-              </folding>
+            <state line="95" column="20" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0" vertical-offset="1309" max-vertical-offset="3264">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -163,12 +153,8 @@
       <file leaf-file-name="DataHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/models/DataHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="0" selection-start="4630" selection-end="4630" vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="2057">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3538#3884#0" expanded="true" />
-                <element signature="e#3873#3874#0" expanded="true" />
-              </folding>
+            <state line="97" column="60" selection-start="3494" selection-end="3494" vertical-scroll-proportion="0.0" vertical-offset="1124" max-vertical-offset="1887">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -177,9 +163,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/models/Message.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="65" column="69" selection-start="1672" selection-end="1672" vertical-scroll-proportion="0.0" vertical-offset="264" max-vertical-offset="1309">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -187,7 +171,7 @@
       <file leaf-file-name="Member.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/models/Member.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="88" selection-start="2754" selection-end="3532" vertical-scroll-proportion="0.0" vertical-offset="2015" max-vertical-offset="2703">
+            <state line="133" column="88" selection-start="2754" selection-end="3532" vertical-scroll-proportion="0.0" vertical-offset="2261" max-vertical-offset="2805">
               <folding />
             </state>
           </provider>
@@ -196,11 +180,8 @@
       <file leaf-file-name="GroupedNetworkData.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/grouped/network/GroupedNetworkData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="230" column="32" selection-start="8827" selection-end="8827" vertical-scroll-proportion="0.0" vertical-offset="3239" max-vertical-offset="4437">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7812#7820#0" expanded="true" />
-              </folding>
+            <state line="230" column="32" selection-start="8827" selection-end="8827" vertical-scroll-proportion="0.0" vertical-offset="3910" max-vertical-offset="5253">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -421,8 +402,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -508,6 +489,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -533,19 +527,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -688,7 +669,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="816" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -701,12 +682,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39819005" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42232278" sideWeight="0.80226904" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5022625" sideWeight="0.80226904" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13047002" sideWeight="0.61387634" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.77045697" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21150729" sideWeight="0.57767725" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21150729" sideWeight="0.49773756" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37405732" sideWeight="0.46515396" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23099415" sideWeight="0.6807131" order="13" side_tool="false" content_ui="tabs" x="82" y="86" width="1096" height="616" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -719,18 +700,18 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23099415" sideWeight="0.6807131" order="13" side_tool="false" content_ui="tabs" x="82" y="86" width="1096" height="616" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22473605" sideWeight="0.3184765" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.77045697" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21150729" sideWeight="0.81598794" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37405732" sideWeight="0.46515396" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37405732" sideWeight="0.46515396" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -743,8 +724,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39819005" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18401207" sideWeight="0.80226904" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13047002" sideWeight="0.61387634" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.77045697" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -804,50 +785,18 @@
     <entry file="file://$PROJECT_DIR$/src/com/example/grouped/network/GroupedNetworkData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="230" column="32" selection-start="8827" selection-end="8827" vertical-scroll-proportion="0.0" vertical-offset="3239" max-vertical-offset="4437">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7812#7820#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/app/Activity.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="19" selection-start="2223" selection-end="2223" vertical-scroll-proportion="0.33147633" vertical-offset="765" max-vertical-offset="7429">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/grouped/StartUp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/grouped/models/DataHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="0" selection-start="4630" selection-end="4630" vertical-scroll-proportion="0.0" vertical-offset="1685" max-vertical-offset="2057">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3538#3884#0" expanded="true" />
-            <element signature="e#3873#3874#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="53" column="19" selection-start="2223" selection-end="2223" vertical-scroll-proportion="0.33147633" vertical-offset="765" max-vertical-offset="7429" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/grouped/models/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="65" column="69" selection-start="1672" selection-end="1672" vertical-scroll-proportion="0.0" vertical-offset="621" max-vertical-offset="1309">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/grouped/database/MemberTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="53" selection-start="1790" selection-end="1804" vertical-scroll-proportion="0.0" vertical-offset="618" max-vertical-offset="986">
           <folding />
         </state>
       </provider>
@@ -859,13 +808,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/grouped/models/DataHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="60" selection-start="3494" selection-end="3494" vertical-scroll-proportion="0.0" vertical-offset="1124" max-vertical-offset="1887">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/grouped/database/GroupedData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="161" selection-start="2402" selection-end="2402" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3468">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4830#4837#0" expanded="true" />
-          </folding>
+        <state line="95" column="20" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0" vertical-offset="1309" max-vertical-offset="3264">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/grouped/database/MemberTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="53" selection-start="1790" selection-end="1804" vertical-scroll-proportion="0.0" vertical-offset="618" max-vertical-offset="986">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -878,15 +838,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/grouped/tests/DataTester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="8" selection-start="743" selection-end="743" vertical-scroll-proportion="-0.47619048" vertical-offset="476" max-vertical-offset="2669">
-          <folding>
-            <element signature="e#1129#1329#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
-            <element signature="e#1362#1678#0" expanded="true" />
-            <element signature="e#1667#1668#0" expanded="true" />
-            <element signature="e#3059#3448#0" expanded="true" />
-            <element signature="e#3437#3438#0" expanded="true" />
-          </folding>
+        <state line="21" column="4" selection-start="548" selection-end="548" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2516">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/grouped/StartUp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="938" selection-end="938" vertical-scroll-proportion="-0.45394737" vertical-offset="325" max-vertical-offset="629">
+          <folding />
         </state>
       </provider>
     </entry>

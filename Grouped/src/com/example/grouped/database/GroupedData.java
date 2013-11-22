@@ -132,8 +132,11 @@ public class GroupedData {
         this.open();
 
         for(Message message : messages) {
+            // check if the message was alread retrieved
+            if(database.query(MessageTable.TABLE_NAME, new String[]{MessageTable.COLUMN_ID}, MessageTable.COLUMN_ID + "=?", new String[]{message.getId() + ""}, null, null, null).getCount() == 0) {
             database.insert(MessageTable.TABLE_NAME, null,
                     message.toDataRow());
+            }
         }
 
         this.close();

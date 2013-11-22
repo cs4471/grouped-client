@@ -64,7 +64,7 @@ public class DataHandler {
     }
 
     public void checkin(final Member me, final Response.Listener<Integer> dhResponse) {
-        networkHelper.checkin(me, new Response.Listener<Integer>() {
+        networkHelper.sendCheckin(me, new Response.Listener<Integer>() {
             @Override
             public void onResponse(Integer integer) {
                 databaseHelper.updateMember(me);
@@ -82,10 +82,10 @@ public class DataHandler {
             lastCheckin = Math.max(member.getLastCheckin(), lastCheckin);
         }
 
-        networkHelper.checkinsGet(group, lastCheckin, new Response.Listener<List<Member>>() {
+        networkHelper.getCheckins(group, lastCheckin, new Response.Listener<List<Member>>() {
             @Override
             public void onResponse(List<Member> members) {
-                for(Member member : members) {
+                for (Member member : members) {
                     member.setGroupID(group.getId());
                     databaseHelper.updateMember(member);
                 }

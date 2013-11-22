@@ -159,7 +159,7 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-    public void checkin(Member me, final Response.Listener<Integer> response){
+    public void sendCheckin(Member me, final Response.Listener<Integer> response){
         String url = BASEURL + "/checkins/new";
         JSONObject params = null;
 
@@ -192,7 +192,7 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-	public void checkinsGet(Group group, Integer lastCheckin, final Response.Listener<List<Member>> response){
+	public void getCheckins(Group group, Integer lastCheckin, final Response.Listener<List<Member>> response){
 	    String url = BASEURL + "/checkins/get";
 		Map<String, Integer> checkinsGetArgs = new HashMap();
 		checkinsGetArgs.put("group_id", group.getId().intValue());

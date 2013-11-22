@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.grouped.models.Group;
 import com.example.grouped.models.Member;
+import com.example.grouped.models.Message;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,12 +27,6 @@ public class GroupedData {
 
     private GroupedData(Context context) {
         dbHelper = new GroupedDatabaseHelper(context);
-
-        // for debugging
-        this.open();
-        database.delete(GroupTable.TABLE_NAME, null, null);
-        database.delete(MemberTable.TABLE_NAME, null, null);
-        this.close();
     }
 
     public static GroupedData getGroupedDataInstance(Context context) {
@@ -47,6 +42,13 @@ public class GroupedData {
 
     private void close() {
         dbHelper.close();
+    }
+
+    public void clearDB() {
+        this.open();
+        database.delete(GroupTable.TABLE_NAME, null, null);
+        database.delete(MemberTable.TABLE_NAME, null, null);
+        this.close();
     }
 
     public boolean updateMember(Member member) {
@@ -71,11 +73,11 @@ public class GroupedData {
         return updated;
     }
 
-    public List<Member> getMembers(Long groupID) {
+    public List<Member> getMembers(Group group) {
         List<Member> members = new ArrayList();
 
         this.open();
-        Cursor cursor = database.query(MemberTable.TABLE_NAME, MemberTable.allColumns(), null, null, null, null, null);
+        Cursor cursor = database.query(MemberTable.TABLE_NAME, MemberTable.allColumns(), MemberTable.COLUMN_GROUPID + "=?", new String[]{group.getId().toString()}, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -90,6 +92,54 @@ public class GroupedData {
         return members;
     }
 
+    public Member getMe() {
+        this.open();
+        Cursor cursor = database.query(MemberTable.TABLE_NAME, MemberTable.allColumns(), "me=?", new String[]{"1"}, null, null, null);
+
+        cursor.moveToFirst();
+        Member me = new Member();
+        me.fromCursor(cursor);
+
+        cursor.close();
+        this.close();
+        return me;
+    }
+
+    public List<Message> getMessages(Group group) {
+        List<Member> members = this.getMembers(group);
+        List<Message> messages = new ArrayList();
+
+        this.open();
+        for(Member member : members) {
+            Cursor cursor = database.query(MessageTable.TABLE_NAME, MessageTable.allColumns(), MessageTable.COLUMN_MEMBER_ID + "=?", new String[]{member.getId().toString()}, null, null, null);
+
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Message message = new Message();
+                message.fromCursor(cursor);
+                messages.add(message);
+                cursor.moveToNext();
+            }
+            // Make sure to close the cursor
+            cursor.close();
+        }
+
+        this.close();
+        return messages;
+    }
+
+    public boolean addMessages(List<Message> messages) {
+        this.open();
+
+        for(Message message : messages) {
+            database.insert(MessageTable.TABLE_NAME, null,
+                    message.toDataRow());
+        }
+
+        this.close();
+
+        return true;
+    }
 
     public boolean storeGroup(Group group) {
         this.open();

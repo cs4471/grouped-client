@@ -126,35 +126,26 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-    public void destroyGroup(Group groupToDestroy, final Response.Listener<Integer> response){
-        String url = BASEURL + "/groups/delete";
-        JSONObject params = null;
+    public void leaveGroup(Group groupToLeave, Member me, final Response.Listener<Integer> response){
+        String url = BASEURL + "/groups/leave";
+        JSONObject params = new JSONObject();
 
         try {
-            // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(groupToDestroy));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            params.put("group_id", groupToLeave.getId());
+            params.put("member_id", me.getId());
+        } catch(Exception e) {}
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject serverResponse) {
-            	if (serverResponse.has("id")){
-            		Integer groupID = -1;
-					try {
-						groupID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-                    // call the listener passed with the integer id
-                    response.onResponse(groupID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
+            	try{
+                    if (serverResponse.has("id")){
+                        response.onResponse(serverResponse.getInt("id"));
+                    }
+                    else {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+                } catch(Exception e){}
 
             }
         }, new Response.ErrorListener() {
@@ -234,39 +225,27 @@ public class GroupedNetworkData {
 	    GroupedNetworkData.queue.add(jsObjRequest);
 	}
 	
-	public void newMessage(Message messageToSend, 
-							final Response.Listener<Integer> response){
+	public void sendMessage(Message messageToSend,
+                            final Response.Listener<Integer> response){
 	    String url = BASEURL + "/messages/new";
-	    JSONObject params = null;
+	    JSONObject params = new JSONObject();
 	
 	    try {
-	        // turn the message provided into a json object
-	    	params = new JSONObject(new Gson().toJson(messageToSend));
-	    } catch (JSONException e) {
-	        e.printStackTrace();
-	    }
+	        params.put("id", messageToSend.getMemberId());
+            params.put("message", messageToSend.getMessage());
+	    } catch (Exception e) { }
 	
 	    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
 	        @Override
 	        public void onResponse(JSONObject serverResponse) {
-	        	// check for error
-            	if (serverResponse.has("id")){
-            		Integer messageID = -1;
-					try {
-						messageID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-                    // call the listener passed with the integer id
-                    response.onResponse(messageID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
-	
-	            Log.i("Network Grouped Data", serverResponse.toString());
+                try {
+                    // check for error
+                    if (serverResponse.has("id")){
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+                } catch (Exception e) {}
 	        }
 	    }, new Response.ErrorListener() {
 	        @Override
@@ -279,33 +258,29 @@ public class GroupedNetworkData {
 	    GroupedNetworkData.queue.add(jsObjRequest);
 	}
 	
-	public void getMessages(Group group, Message lastMessage,
+	public void getMessages(Group group, Integer lastMessage,
 			final Response.Listener<List<Message>> response){
-		String url = BASEURL + "/messages/get";
-		JSONObject params = null;
+
+        String url = BASEURL + "/messages/get";
+        Map<String, Integer> checkinsGetArgs = new HashMap();
+        checkinsGetArgs.put("group_id", group.getId().intValue());
+        checkinsGetArgs.put("message_id", lastMessage);
+        url += toUrlParams(checkinsGetArgs);
 		
-		Map<String, Long> getMessageArgs = new HashMap<String, Long>();
-		getMessageArgs.put("group_id", group.getId());
-		// TODO: checkinsGetArgs.put("message_id", message.getLastID());
-		
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject serverResponse) {
-				// check for error
-				List<Message> messagesList = new ArrayList<Message>();
+				List<Message> messageList = new ArrayList();
+                Message[] messages = new Message[0];
+                try {
+                    Log.v("grouped network", serverResponse.getJSONArray("messages").toString());
+                    messages = new Gson().fromJson(serverResponse.getJSONArray("messages").toString(), Message[].class);
+                } catch (Exception e) {}
 
-				if (serverResponse.has("checkins")){
-	        		Message[] messages = new Gson().fromJson(serverResponse.toString(), Message[].class);
-	        		messagesList.addAll(Arrays.asList(messages));
-	
-	                // call the listener passed with the integer id
-	                response.onResponse(messagesList);
-	        	}
-	        	else {
-	        		response.onResponse(null);
-	        	}
-			
-				Log.i("Network Grouped Data", serverResponse.toString());
+                messageList.addAll(Arrays.asList(messages));
+
+                // call the listener passed with the integer id
+                response.onResponse(messageList);
 			}
 		}, new Response.ErrorListener() {
 			@Override

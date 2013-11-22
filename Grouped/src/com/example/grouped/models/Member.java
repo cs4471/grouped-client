@@ -32,9 +32,7 @@ public class Member {
     private ArrayList<Message> messages;
     private boolean me;
 
-    public Member() {
-
-    }
+    public Member() {}
 
     public long getGroupID() {
         return groupID;

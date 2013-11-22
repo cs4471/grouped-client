@@ -11,7 +11,7 @@ public class MemberTable {
     public static final String TABLE_NAME = "members";
 
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_GROUPID = "groupID";
+    public static final String COLUMN_GROUPID = "group_id";
     public static final String COLUMN_NICKNAME = "nickname";
     public static final String COLUMN_STATUS = "status";
     public static final String COLUMN_LAT = "lat";

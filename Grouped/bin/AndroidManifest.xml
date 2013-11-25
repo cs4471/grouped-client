@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
@@ -27,7 +28,7 @@
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBN1LK1bW7cZDGuasx-z5SWom6OS5QZoPc" />
+            android:value="AIzaSyCb1R0P7s34EeanI9MdgU_ec6Wgi9al1Vc" />
 
         <activity
             android:name="com.example.grouped.StartUp"
@@ -85,6 +86,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grouped.OptionSelect" />
         </activity>
+        <meta-data android:name="com.google.android.gms.version"
+     				android:value="@integer/google_play_services_version"/>
     </application>
 
 </manifest>

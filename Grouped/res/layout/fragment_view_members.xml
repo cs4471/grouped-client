@@ -7,10 +7,91 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ViewCurrentGroup$DummySectionFragment" >
+  
+    <RelativeLayout
+        android:id="@+id/me_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/green_border"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/me_nickname_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/plum_purple">
+        	<TextView 
+            	android:id="@+id/me_nickname"
+            	android:layout_marginBottom="3dp"
+            	android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:textSize="25sp"
+            	android:text="Me"
+            	android:textColor="@color/plum_purple"
+            	android:textStyle="bold"
+            	android:background="@color/steel_grey"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/me_status_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/me_nickname_background"
+            android:layout_below="@+id/me_nickname_background"
+            android:layout_marginTop="5dp"
+            android:text="Status: "
+            android:textSize="15sp"
+            android:textColor="@color/plum_purple" />
 
+        <TextView
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/me_status_title"
+            android:layout_toRightOf="@+id/me_status_title"
+            android:inputType="text"
+            android:textSize="15sp"
+            android:text="Insert Status Here"
+            android:textColor="#ffffff" >
+
+        <requestFocus />
+    </TextView>
     <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            android:id="@+id/me_checkin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/me_status_title"
+            android:layout_below="@+id/me_status_title"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="10dp" 
+            android:text="Checked In Recently: "
+            android:textSize="15sp"
+            android:textColor="@color/plum_purple" />
+    <TextView
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/me_checkin_title"
+            android:layout_toRightOf="@+id/me_checkin_title"
+            android:inputType="text"
+            android:textSize="15sp"
+            android:text="Yes"
+            android:textColor="#ffffff" />
+     </RelativeLayout>
+     <ScrollView
+         android:id="@+id/member_container"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_below="@+id/me_background"
+         android:layout_marginTop="5dp"
+         android:layout_marginBottom="5dp"
+         android:background="#676767">
+         
+     </ScrollView>
+
 
 </RelativeLayout>

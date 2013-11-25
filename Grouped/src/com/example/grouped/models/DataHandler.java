@@ -9,7 +9,7 @@ import com.example.grouped.network.GroupedNetworkData;
 /**
  * Created by Ethan on 11/17/13.
  */
-public class DataHandler {
+/**public class DataHandler {
 
     private static DataHandler singleton = null;
     private GroupedData databaseHelper;
@@ -59,4 +59,4 @@ public class DataHandler {
         }
         return singleton;
     }
-}
+}*/

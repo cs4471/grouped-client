@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.grouped.R;
+import com.example.grouped.models.*;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,6 +32,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ViewCurrentGroup extends FragmentActivity {
+	
+	
+	private static Group group = new Group();
+	private static Member me = new Member();
+	
+	
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -104,24 +111,18 @@ public class ViewCurrentGroup extends FragmentActivity {
 			// Return a ViewMembersFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
 			if (position == 0){
-				Fragment fragment = new MessageBoardFragment();
-				Bundle args = new Bundle();
-				args.putInt(ViewMembersFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
+				Fragment fragment = new ViewMembersFragment(group);
 				return fragment;
 			}
 			if (position == 1) {
 				Fragment fragment = new MapViewFragment();
-				Bundle args = new Bundle();
-				args.putInt(ViewMembersFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
+//				Bundle args = new Bundle();
+//				args.putInt(ViewMembersFragment.ARG_SECTION_NUMBER, position + 1);
+//				fragment.setArguments(args);
 				return fragment;
 			}
 			else {
-				Fragment fragment = new ViewMembersFragment();
-				Bundle args = new Bundle();
-				args.putInt(ViewMembersFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
+				Fragment fragment = new MessageBoardFragment(me);
 				return fragment;
 			}
 		}
@@ -137,56 +138,13 @@ public class ViewCurrentGroup extends FragmentActivity {
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.message_board_title).toUpperCase(l);
+				return getString(R.string.view_members_title).toUpperCase(l);
 			case 1:
 				return getString(R.string.view_map_title).toUpperCase(l);
 			case 2:
-				return getString(R.string.view_members_title).toUpperCase(l);
+				return getString(R.string.message_board_title).toUpperCase(l);
 			}
 			return null;
-		}
-	}
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class ViewMembersFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public ViewMembersFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(
-					R.layout.fragment_view_members, container,
-					false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
-	
-	public static class MessageBoardFragment extends Fragment {
-		
-		public MessageBoardFragment() {
-		}
-		
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(
-					R.layout.fragment_message_board, container,
-					false);
-			return rootView;
 		}
 	}
 	

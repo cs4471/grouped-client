@@ -30,8 +30,8 @@ public class Group {
     @Expose
     private Long id = null;
 
-    private ArrayList<Member> members = null;
-
+  private ArrayList<Member> members = new ArrayList();
+    
     public String getLength() {
         return length;
     }
@@ -80,7 +80,29 @@ public class Group {
     public void setId(Long id) {
         this.id = id;
     }
+    /**
+     * Make Sure To Delete the Following Methods, they will have no use
+     * in final product. Used only for debugging purposes.
+     * @param member
+     */
+    public void addMember(Member member) {
+    	this.members.add(member);
+    }
 
+    public ArrayList<Member> getMembers(){
+    	return this.members;
+    }
+    
+    public Member getMemberById(long id){
+    	Member result = null;
+    	for (Member member : this.members) {
+    		if (id == member.getId()){
+    			result = member;
+    		}
+    	}
+    	return result;
+    }
+    
     public void merge(Group addAttributesFrom) {
         if(this.getName() == null) this.setName(addAttributesFrom.getName());
         if(this.getRoam() == null) this.setRoam(addAttributesFrom.getRoam());

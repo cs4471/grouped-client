@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.example.grouped.R;
+import com.example.grouped.tests.DataTester;
 
 public class StartUp extends Activity {
 
@@ -16,6 +17,7 @@ public class StartUp extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
+
     }
 
 	protected void onResume(Bundle savedInstanceState) {

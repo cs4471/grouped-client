@@ -113,18 +113,18 @@ public class ViewCurrentGroup extends FragmentActivity {
 			if (position == 0){
 				Fragment fragment = new ViewMembersFragment(group);
 				return fragment;
-			}
-			if (position == 1) {
+			} else {
+			//if (position == 1) {
 				Fragment fragment = new MapViewFragment();
 //				Bundle args = new Bundle();
 //				args.putInt(ViewMembersFragment.ARG_SECTION_NUMBER, position + 1);
 //				fragment.setArguments(args);
 				return fragment;
 			}
-			else {
-				Fragment fragment = new MessageBoardFragment(me);
-				return fragment;
-			}
+//			else {
+				//Fragment fragment = new MessageBoardFragment(me);
+				//return fragment;
+//			}
 		}
 
 		@Override

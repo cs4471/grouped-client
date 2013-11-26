@@ -189,14 +189,17 @@ public class GroupedData {
         return groups;
     }
 
+    // returns null if group does not exist with id
     public Group getGroup(Long id) {
+        Group group = null;
         this.open();
         Cursor cursor = database.query(GroupTable.TABLE_NAME, GroupTable.allColumns(), "_id=?", new String[]{id.toString()}, null, null, null);
 
-        cursor.moveToFirst();
-        Group group = new Group();
-        group.fromCursor(cursor);
-
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            group = new Group();
+            group.fromCursor(cursor);
+        }
         cursor.close();
         this.close();
         return group;

@@ -41,6 +41,10 @@ public class DataHandler {
     }
 
     public void joinGroup(final Group group, final Response.Listener<Member> dhResponse) {
+        if(databaseHelper.getGroup(group.getId()) == null) {
+            // if the group is not created yet in the database
+            databaseHelper.storeGroup(group);
+        }
         networkHelper.joinGroup(group, new Response.Listener<Integer>() {
             @Override
             public void onResponse(Integer memberId) {

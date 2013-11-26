@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,11 +17,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.android.volley.Response;
 import com.example.grouped.R;
+import com.example.grouped.models.DataHandler;
+import com.example.grouped.models.Group;
+import com.example.grouped.tests.DataTester;
 
 public class CreateGroup extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.grouped.MESSAGE";
 	public int fieldsCompleted = 0;
+    private Group group = new Group();
 		
 	@SuppressLint("NewApi")
 	@Override
@@ -36,8 +43,24 @@ public class CreateGroup extends Activity {
     }
     
     public void launchConfirmationPage(View view) {
-    	Intent intent = new Intent(this, ConfirmationPageActivity.class);
-    	startActivity(intent);
+        DataHandler dh = DataHandler.getDataHandler(getApplicationContext());
+        dh.createGroup(group, new Response.Listener<Group>() {
+            @Override
+            public void onResponse(Group group) {
+                Log.v("grouped CreatedTheGroup", group.toString());
+                finishCreateGroup(group);
+            }
+        });
+    }
+
+    public void finishCreateGroup(Group group) {
+        SharedPreferences prefs = this.getSharedPreferences("com.example.grouped", MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = prefs.edit();
+        prefEditor.putLong("group_id", group.getId());
+        prefEditor.commit();
+
+        Intent intent = new Intent(this, ConfirmationPageActivity.class);
+        startActivity(intent);
     }
 
 
@@ -58,7 +81,7 @@ public class CreateGroup extends Activity {
 		}	
 	}
 	
-	private void showSimplePopUp(String attr, int buttonId, int checkId) {
+	private void showSimplePopUp(String attr, final int buttonId, int checkId) {
 		final int button = buttonId;
 		final int check = checkId;
 
@@ -83,7 +106,18 @@ public class CreateGroup extends Activity {
 				 fieldsCompleted++;
 			 	Editable editable = nameInput.getText();
 			 	String value = editable == null ? "": editable.toString();
-			 	//Here is where youd get the field. value holds the string content
+
+                 if (buttonId == (R.id.NameButton)) {
+                     group.setName(value);
+                 } else if (buttonId == (R.id.EventButton)) {
+                     group.setEvent(value);
+                 } else if (buttonId == (R.id.TimeButton)) {
+                     group.setLength(value);
+                 } else if (buttonId == (R.id.FenceButton)) {
+                     group.setRoam(value);
+                 }
+
+
 			 	Button nameButton = (Button) findViewById(button);
 			 	ImageView nameCheck = (ImageView) findViewById(check);
 			 	Drawable greenRing = getResources().getDrawable(R.drawable.attr_buttons_create_group_page_green);

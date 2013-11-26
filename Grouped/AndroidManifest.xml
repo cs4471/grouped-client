@@ -62,14 +62,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grouped.StartUp" />
         </activity>
-        <activity
-            android:name="com.example.grouped.SetGeoFenceActivity"
-            android:label="@string/title_activity_set_geo_fence"
-            android:parentActivityName="com.example.grouped.CreateGroup" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.grouped.CreateGroup" />
-        </activity>
+
         <activity
             android:name="com.example.grouped.ViewCurrentGroup"
             android:label="@string/title_activity_view_current_group"
@@ -86,8 +79,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grouped.OptionSelect" />
         </activity>
-        <meta-data android:name="com.google.android.gms.version"
-     				android:value="@integer/google_play_services_version"/>
     </application>
 
 </manifest>

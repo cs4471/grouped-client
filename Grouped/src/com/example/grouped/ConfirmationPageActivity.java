@@ -4,14 +4,21 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.example.grouped.R;
+import com.example.grouped.models.DataHandler;
+import com.example.grouped.models.Group;
+
+import java.util.List;
 
 public class ConfirmationPageActivity extends Activity {
 	
@@ -20,15 +27,28 @@ public class ConfirmationPageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {		  
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_confirmation_page);
-		String id = "ID12345";
-		String key = "KEYabcde";
-		TextView displayId = (TextView)findViewById(R.id.display_id);
-		TextView displayKey = (TextView)findViewById(R.id.display_key);
-		/**
-		 * HERE IS WHERE YOU WOULD CALL DATABASE METHODS 
-		 */
-		displayId.setText(id);
-		displayKey.setText(key);
+
+
+        SharedPreferences prefs = this.getSharedPreferences("com.example.grouped", MODE_PRIVATE);
+        final long groupId = prefs.getLong("group_id", 0);
+        Log.v("Grouped Confirmation", groupId + "");
+
+		final TextView displayId = (TextView)findViewById(R.id.display_id);
+		final TextView displayKey = (TextView)findViewById(R.id.display_key);
+
+        DataHandler dh = DataHandler.getDataHandler(getApplicationContext());
+        dh.getGroups(new Response.Listener<List<Group>>() {
+            @Override
+            public void onResponse(List<Group> groups) {
+                for(Group group : groups) {
+                    if(group.getId() == groupId ) {
+                        displayId.setText("" + group.getId());
+                        displayKey.setText(group.getName());
+                    }
+                }
+            }
+        });
+
 	}
 
 	/**	 

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="grouped">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bin/grouped.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

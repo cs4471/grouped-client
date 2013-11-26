@@ -35,10 +35,10 @@ import android.widget.TextView;
 			}
 			member.setNickname("Group Member" + i);
 			member.setStatus("Status"+i);
-			member.setLastCheckin(i%2);
+			//member.setLastCheckin(i%2);
 			member.setMe(false);
 			member.setId(i);
-			group.addMember(member);
+			//group.addMember(member);
 		}
 		
 		return group;
@@ -48,23 +48,23 @@ import android.widget.TextView;
 		RelativeLayout members = new RelativeLayout(getActivity());
 		int i = 0;
 		
-		for (Member member : this.group.getMembers()) {
-			RelativeLayout memberBox = new RelativeLayout(getActivity());
-			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-					RelativeLayout.LayoutParams.MATCH_PARENT,
-					RelativeLayout.LayoutParams.WRAP_CONTENT);
-			memberBox.setBackgroundResource(R.drawable.green_border);
-			addNickname(memberBox, member.getNickname());
-			addStatus(memberBox, member.getStatus());
-			addCheckIn(memberBox);
-			memberBox.setId(i);
-			params.setMargins(5, 5, 5, 5);
-			if(i > 0){
-				params.addRule(RelativeLayout.BELOW, i-1);
-			}
-			i++;
-			members.addView(memberBox, params);
-		}
+//		for (Member member : this.group.getMembers()) {
+//			RelativeLayout memberBox = new RelativeLayout(getActivity());
+//			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+//					RelativeLayout.LayoutParams.MATCH_PARENT,
+//					RelativeLayout.LayoutParams.WRAP_CONTENT);
+//			memberBox.setBackgroundResource(R.drawable.green_border);
+//			addNickname(memberBox, member.getNickname());
+//			addStatus(memberBox, member.getStatus());
+//			addCheckIn(memberBox);
+//			memberBox.setId(i);
+//			params.setMargins(5, 5, 5, 5);
+//			if(i > 0){
+//				params.addRule(RelativeLayout.BELOW, i-1);
+//			}
+//			i++;
+//			members.addView(memberBox, params);
+//		}
 		return members;
 	}
 	

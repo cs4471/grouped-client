@@ -28,9 +28,9 @@ public class DataTester {
         testDataHandler();
         //testGetGroups();
 
-//        GroupedData data = GroupedData.getGroupedDataInstance(context);
-//        Group group = data.getGroup((long)13);
-//        testGetCheckins(group);
+        GroupedData data = GroupedData.getGroupedDataInstance(context);
+        ///Group group = data.getGroup((long)14);
+        //testGetCheckins(group);
 
         //testMessages(data.getGroup((long)10));
 
@@ -97,6 +97,7 @@ public class DataTester {
         DataHandler dh = DataHandler.getDataHandler(context);
         final Group testGroup = new Group();
         testGroup.setName("TEST GROUP NAME");
+        Log.v("grouped DataHandler Create Group", testGroup.toString());
 
         dh.createGroup(testGroup, new Response.Listener<Group>(){
             @Override

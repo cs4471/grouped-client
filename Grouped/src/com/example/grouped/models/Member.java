@@ -5,6 +5,8 @@ import android.database.Cursor;
 
 import com.example.grouped.database.MemberTable;
 import com.example.grouped.network.Crypto;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
 import java.security.NoSuchAlgorithmException;
@@ -36,7 +38,7 @@ public class Member {
     private String certainty;
 
     @Expose
-    private int lastCheckin;
+    private Integer checkin_id = null;
 
     private boolean me;
     private long groupID;
@@ -66,11 +68,7 @@ public class Member {
     }
 
     public int getLastCheckin() {
-        return -1;
-    }
-
-    public void setLastCheckin(int lastCheckin) {
-        this.lastCheckin = lastCheckin;
+        return checkin_id;
     }
 
     public String getStatus() {
@@ -113,6 +111,10 @@ public class Member {
         this.me = me;
     }
 
+    public void setCheckin_id(int checkin_id) {
+        this.checkin_id = checkin_id;
+    }
+
     public Member encrypt(String key) {
         Crypto crypto = null;
         Member encrypted = new Member();
@@ -122,6 +124,7 @@ public class Member {
             encrypted.setId(this.id);
             encrypted.setGroupID(this.groupID);
             encrypted.setMe(this.me);
+            encrypted.setCheckin_id(this.checkin_id);
 
             encrypted.setNickname(crypto.encrypt(this.nickname));
             encrypted.setStatus(crypto.encrypt(this.status));
@@ -142,6 +145,7 @@ public class Member {
             decrypted.setId(this.id);
             decrypted.setGroupID(this.groupID);
             decrypted.setMe(this.me);
+            decrypted.setCheckin_id(this.checkin_id);
 
             decrypted.setNickname(crypto.decrypt(this.nickname));
             decrypted.setStatus(crypto.decrypt(this.status));
@@ -159,6 +163,7 @@ public class Member {
         values.put(MemberTable.COLUMN_ID, this.id);
         values.put(MemberTable.COLUMN_GROUPID, this.groupID);
         values.put(MemberTable.COLUMN_ME, (this.me ? 1 : 0));
+        if(this.checkin_id != null) values.put(MemberTable.COLUMN_CHECKIN_ID, this.checkin_id);
         if(this.nickname != null) values.put(MemberTable.COLUMN_NICKNAME, this.nickname);
         if(this.status != null) values.put(MemberTable.COLUMN_STATUS, this.status);
         if(this.lat != null) values.put(MemberTable.COLUMN_LAT, this.lat);
@@ -177,24 +182,15 @@ public class Member {
         this.lng = (cursor.getString(cursor.getColumnIndex(MemberTable.COLUMN_LNG)));
         this.certainty = (cursor.getString(cursor.getColumnIndex(MemberTable.COLUMN_CERTAINTY)));
         this.me = (cursor.getInt(cursor.getColumnIndex(MemberTable.COLUMN_ME))) == 0 ? false : true;
+        this.checkin_id = (cursor.getInt(cursor.getColumnIndex(MemberTable.COLUMN_CHECKIN_ID)));
     }
 
     @Override
     public String toString() {
         String member = "";
 
-        member += "Member(" + id +
-                ") : group(" + groupID +
-                ") me = " + me;
-        if(nickname!= null) {
-            member += ") nickname = " + nickname;
-        }
-//                ") nickname = " + me +
-//                ") status = " + me +
-//                ") lat = " + me +
-//                ") lng = " + me +
-//                ") certainty = " + me +
-//                ") messages(" + messages.size() + ")";
+        member += "Member(" +
+                new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(this, Member.class);
 
         return member;
     }

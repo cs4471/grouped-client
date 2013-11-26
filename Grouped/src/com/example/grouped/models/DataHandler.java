@@ -92,7 +92,6 @@ public class DataHandler {
             public void onResponse(List<Member> members) {
                 List<Member> decrypted = new ArrayList<Member>();
                 for (Member member : members) {
-                    Log.v("grouped DataHandler NetworkMember Recieved", member.toString());
                     member.setGroupID(group.getId());
                     databaseHelper.updateMember(member);
                     decrypted.add(member.decrypt(group.getKey()));
@@ -104,8 +103,7 @@ public class DataHandler {
 
     public void sendMessage(final Group group, final Message message, final Response.Listener<Integer> dhResponse) {
         message.setMemberId(databaseHelper.getMe().getId());
-        message.encrypt(group.getKey());
-        networkHelper.sendMessage(message, new Response.Listener<Integer>() {
+        networkHelper.sendMessage(message.encrypt(group.getKey()), new Response.Listener<Integer>() {
             @Override
             public void onResponse(Integer integer) {
                 List<Message> messageList = new ArrayList();

@@ -18,6 +18,7 @@ public class MemberTable {
     public static final String COLUMN_LNG = "lng";
     public static final String COLUMN_CERTAINTY = "certainty";
     public static final String COLUMN_ME = "me";
+    public static final String COLUMN_CHECKIN_ID = "checkin_id";
 
 
     // Database creation sql statement
@@ -30,6 +31,7 @@ public class MemberTable {
             + COLUMN_LNG + " text, "
             + COLUMN_CERTAINTY + " text, "
             + COLUMN_ME + " integer default 0, "
+            + COLUMN_CHECKIN_ID + " integer default -1, "
             + COLUMN_STATUS + " text);";
 
     public static void onCreate(SQLiteDatabase database) {
@@ -46,7 +48,7 @@ public class MemberTable {
     }
 
     public static String[] allColumns() {
-        String[] columns = {COLUMN_ID, COLUMN_GROUPID, COLUMN_NICKNAME, COLUMN_ME, COLUMN_STATUS, COLUMN_LAT, COLUMN_LNG, COLUMN_CERTAINTY};
+        String[] columns = {COLUMN_ID, COLUMN_GROUPID, COLUMN_NICKNAME, COLUMN_CHECKIN_ID, COLUMN_ME, COLUMN_STATUS, COLUMN_LAT, COLUMN_LNG, COLUMN_CERTAINTY};
         return columns;
     }
 

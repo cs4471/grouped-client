@@ -5,6 +5,8 @@ import android.database.Cursor;
 
 import com.example.grouped.database.GroupTable;
 import com.example.grouped.network.Crypto;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
 import java.security.InvalidKeyException;
@@ -151,13 +153,8 @@ public class Group {
     @Override
     public String toString() {
         String group = "";
-        group += "Group(" + this.id + ") : "
-                + this.name + " - ";
-//                "name = " + name +
-//                "event = " + event +
-//                "length = " + length +
-//                "roam = " + roam +
-//                "members( = " + members.size() + ")";
+        group += "Group(" + this.getName() + ")" +
+                new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(this, Group.class);
         return group;
     }
 

@@ -4,9 +4,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.example.grouped.database.MemberTable;
+import com.example.grouped.network.Crypto;
 import com.google.gson.annotations.Expose;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by Sebastian on 10/2/13.
@@ -14,7 +18,7 @@ import java.util.ArrayList;
 public class Member {
 
     @Expose
-    private long id, groupID;
+    private long id;
 
     @Expose
     private String nickname;
@@ -23,16 +27,19 @@ public class Member {
     private String status;
 
     @Expose
-    private String lat, lng, certainty;
+    private String lat;
+
+    @Expose
+    private String lng;
+
+    @Expose
+    private String certainty;
 
     @Expose
     private int lastCheckin;
 
-    @Expose
-    private ArrayList<Message> messages;
     private boolean me;
-
-    public Member() {}
+    private long groupID;
 
     public long getGroupID() {
         return groupID;
@@ -59,7 +66,7 @@ public class Member {
     }
 
     public int getLastCheckin() {
-        return lastCheckin;
+        return -1;
     }
 
     public void setLastCheckin(int lastCheckin) {
@@ -106,12 +113,44 @@ public class Member {
         this.me = me;
     }
 
-    public ArrayList<Message> getMessages() {
-        return messages;
+    public Member encrypt(String key) {
+        Crypto crypto = null;
+        Member encrypted = new Member();
+        try {
+            crypto = new Crypto();
+            crypto.setKey(key);
+            encrypted.setId(this.id);
+            encrypted.setGroupID(this.groupID);
+            encrypted.setMe(this.me);
+
+            encrypted.setNickname(crypto.encrypt(this.nickname));
+            encrypted.setStatus(crypto.encrypt(this.status));
+            encrypted.setLat(crypto.encrypt(this.lat));
+            encrypted.setLng(crypto.encrypt(this.lng));
+            encrypted.setCertainty(crypto.encrypt(this.certainty));
+
+        } catch (Exception e) {}
+        return encrypted;
     }
 
-    public void setMessages(ArrayList<Message> messages) {
-        this.messages = messages;
+    public Member decrypt(String key) {
+        Crypto crypto = null;
+        Member decrypted = new Member();
+        try {
+            crypto = new Crypto();
+            crypto.setKey(key);
+            decrypted.setId(this.id);
+            decrypted.setGroupID(this.groupID);
+            decrypted.setMe(this.me);
+
+            decrypted.setNickname(crypto.decrypt(this.nickname));
+            decrypted.setStatus(crypto.decrypt(this.status));
+            decrypted.setLat(crypto.decrypt(this.lat));
+            decrypted.setLng(crypto.decrypt(this.lng));
+            decrypted.setCertainty(crypto.decrypt(this.certainty));
+
+        } catch (Exception e) {}
+        return decrypted;
     }
 
     public ContentValues toDataRow() {
@@ -119,7 +158,7 @@ public class Member {
 
         values.put(MemberTable.COLUMN_ID, this.id);
         values.put(MemberTable.COLUMN_GROUPID, this.groupID);
-        values.put(MemberTable.COLUMN_ME, this.me);
+        values.put(MemberTable.COLUMN_ME, (this.me ? 1 : 0));
         if(this.nickname != null) values.put(MemberTable.COLUMN_NICKNAME, this.nickname);
         if(this.status != null) values.put(MemberTable.COLUMN_STATUS, this.status);
         if(this.lat != null) values.put(MemberTable.COLUMN_LAT, this.lat);
@@ -147,6 +186,9 @@ public class Member {
         member += "Member(" + id +
                 ") : group(" + groupID +
                 ") me = " + me;
+        if(nickname!= null) {
+            member += ") nickname = " + nickname;
+        }
 //                ") nickname = " + me +
 //                ") status = " + me +
 //                ") lat = " + me +

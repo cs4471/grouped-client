@@ -55,9 +55,13 @@ public class GroupedData {
         boolean updated = false;
 
         this.open();
-        Cursor cursor = database.query(MemberTable.TABLE_NAME, new String[]{MemberTable.COLUMN_ID}, "_id=?", new String[]{member.getId().toString()}, null, null, null);
+        Cursor cursor = database.query(MemberTable.TABLE_NAME, new String[]{MemberTable.COLUMN_ID, MemberTable.COLUMN_ME}, "_id=?", new String[]{member.getId().toString()}, null, null, null);
 
         if(cursor.getCount() > 0) {
+            cursor.moveToNext();
+            if(cursor.getInt(cursor.getColumnIndex(MemberTable.COLUMN_ME)) == 1) {
+                member.setMe(true);
+            }
             if(database.update(MemberTable.TABLE_NAME, member.toDataRow(), "_id=?", new String[]{member.getId().toString()}) > 0) {
                 updated = true;
             }

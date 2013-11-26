@@ -9,6 +9,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,7 @@ import com.example.grouped.models.Group;
 import com.example.grouped.models.Member;
 import com.example.grouped.models.Message;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,9 +32,10 @@ import org.json.JSONObject;
 public class GroupedNetworkData {
 	private static Integer ERROR = -1;
     private static GroupedNetworkData instance = null;
-    private static final String BASEURL = "http://thimmig2-box-11673.use1.actionbox.io";
+    private static final String BASEURL = "https://grouped.herokuapp.com";
 
     private static RequestQueue queue;
+    private static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     private GroupedNetworkData(Context context) {
         GroupedNetworkData.queue = Volley.newRequestQueue(context);
@@ -60,7 +63,7 @@ public class GroupedNetworkData {
 
         try {
             // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(newGroupInfo));
+            params = new JSONObject(gson.toJson(newGroupInfo));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -96,7 +99,7 @@ public class GroupedNetworkData {
 
         try {
             // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(groupToJoin));
+            params = new JSONObject(gson.toJson(groupToJoin));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -113,7 +116,6 @@ public class GroupedNetworkData {
                     }
             	} catch (Exception e) {}
 
-                Log.i("Network Grouped Data", serverResponse.toString());
             }
         }, new Response.ErrorListener() {
             @Override
@@ -165,7 +167,7 @@ public class GroupedNetworkData {
 
         try {
             // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(me));
+            params = new JSONObject(gson.toJson(me));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -205,9 +207,11 @@ public class GroupedNetworkData {
                 List<Member> membersList = new ArrayList<Member>();
                 Member[] members = new Member[0];
                 try {
-                    Log.v("grouped network", serverResponse.getJSONArray("checkins").toString());
-                    members = new Gson().fromJson(serverResponse.getJSONArray("checkins").toString(), Member[].class);
-                } catch (Exception e) {}
+                    Log.e("Grouped Network", serverResponse.toString());
+                    members = gson.fromJson(serverResponse.getJSONArray("checkins").toString(), Member[].class);
+                } catch (Exception e) {
+
+                }
 
                 membersList.addAll(Arrays.asList(members));
 
@@ -273,8 +277,7 @@ public class GroupedNetworkData {
 				List<Message> messageList = new ArrayList();
                 Message[] messages = new Message[0];
                 try {
-                    Log.v("grouped network", serverResponse.getJSONArray("messages").toString());
-                    messages = new Gson().fromJson(serverResponse.getJSONArray("messages").toString(), Message[].class);
+                    messages = gson.fromJson(serverResponse.getJSONArray("messages").toString(), Message[].class);
                 } catch (Exception e) {}
 
                 messageList.addAll(Arrays.asList(messages));
@@ -300,44 +303,5 @@ public class GroupedNetworkData {
         }
         return paramString;
     }
-	
-	// Untested implementation of GPS. Might break the App
-	Button btnShowLocation;
-	
-    // GPSTracker class
-    GPSTracker gps;
-	
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-		
-        btnShowLocation = (Button) findViewById(R.id.btnShowLocation);
-		
-        // show location button click event
-        btnShowLocation.setOnClickListener(new View.OnClickListener() {
-			
-            @Override
-            public void onClick(View arg0) {       
-                // create class object
-                gps = new GPSTracker(AndroidGPSTrackingActivity.this);
-				
-                // check if GPS enabled       
-                if(gps.canGetLocation()){
-					
-                    double latitude = gps.getLatitude();
-                    double longitude = gps.getLongitude();
-					
-                    // \n is for new line
-                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();   
-                }else{
-                    // can't get location
-                    // GPS or Network is not enabled
-                    // Ask user to enable GPS/network in settings
-                    gps.showSettingsAlert();
-                }
-				
-            }
-        });
-    }
+
 }

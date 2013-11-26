@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.example.grouped.database.GroupTable;
 import com.example.grouped.database.MemberTable;
 import com.example.grouped.database.MessageTable;
+import com.example.grouped.network.Crypto;
 
 /**
  * Created by Sebastian on 10/2/13.
@@ -50,6 +51,36 @@ public class Message {
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public Message encrypt(String key) {
+        Crypto crypto = null;
+        Message encrypted = new Message();
+        try {
+            crypto = new Crypto();
+            crypto.setKey(key);
+            encrypted.setId(this.id);
+            encrypted.setMemberId(this.memberId);
+
+            encrypted.setMessage(crypto.encrypt(this.message));
+
+        } catch (Exception e) {}
+        return encrypted;
+    }
+
+    public Message decrypt(String key) {
+        Crypto crypto = null;
+        Message decrypted = new Message();
+        try {
+            crypto = new Crypto();
+            crypto.setKey(key);
+            decrypted.setId(this.id);
+            decrypted.setMemberId(this.memberId);
+
+            decrypted.setMessage(crypto.decrypt(this.message));
+
+        } catch (Exception e) {}
+        return decrypted;
     }
 
     public void fromCursor(Cursor cursor) {

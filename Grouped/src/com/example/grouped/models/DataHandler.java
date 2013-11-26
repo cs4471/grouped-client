@@ -1,6 +1,7 @@
 package com.example.grouped.models;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Response;
 import com.example.grouped.database.GroupedData;
@@ -48,7 +49,7 @@ public class DataHandler {
                 member.setGroupID((long) group.getId());
                 member.setMe(true);
                 dhResponse.onResponse(member);
-                databaseHelper.updateMember(member);
+                databaseHelper.updateMember(member.encrypt(group.getKey()));
             }
         });
     }
@@ -64,38 +65,46 @@ public class DataHandler {
     }
 
     public void checkin(final Member me, final Response.Listener<Integer> dhResponse) {
-        networkHelper.sendCheckin(me, new Response.Listener<Integer>() {
+        String groupKey = databaseHelper.getGroup(me.getGroupID()).getKey();
+        final Member encrypted = me.encrypt(groupKey);
+        networkHelper.sendCheckin(encrypted, new Response.Listener<Integer>() {
             @Override
             public void onResponse(Integer integer) {
-                databaseHelper.updateMember(me);
+                databaseHelper.updateMember(encrypted);
                 dhResponse.onResponse(integer);
             }
         });
     }
 
     public void getCheckins(final Group group, final Response.Listener<List<Member>> dhResponse) {
-        List<Member> members = databaseHelper.getMembers(group);
-        dhResponse.onResponse(members);
+        List<Member> encryptedMembers = databaseHelper.getMembers(group);
+        List<Member> decryptedMembers = new ArrayList();
 
         int lastCheckin = -1;
-        for(Member member : members) {
+        for(Member member : encryptedMembers) {
+            decryptedMembers.add(member.decrypt(group.getKey()));
             lastCheckin = Math.max(member.getLastCheckin(), lastCheckin);
         }
+        dhResponse.onResponse(decryptedMembers);
 
         networkHelper.getCheckins(group, lastCheckin, new Response.Listener<List<Member>>() {
             @Override
             public void onResponse(List<Member> members) {
+                List<Member> decrypted = new ArrayList<Member>();
                 for (Member member : members) {
+                    Log.v("grouped DataHandler NetworkMember Recieved", member.toString());
                     member.setGroupID(group.getId());
                     databaseHelper.updateMember(member);
+                    decrypted.add(member.decrypt(group.getKey()));
                 }
-                dhResponse.onResponse(members);
+                dhResponse.onResponse(decrypted);
             }
         });
     }
 
-    public void sendMessage(final Message message, final Response.Listener<Integer> dhResponse) {
+    public void sendMessage(final Group group, final Message message, final Response.Listener<Integer> dhResponse) {
         message.setMemberId(databaseHelper.getMe().getId());
+        message.encrypt(group.getKey());
         networkHelper.sendMessage(message, new Response.Listener<Integer>() {
             @Override
             public void onResponse(Integer integer) {
@@ -103,24 +112,32 @@ public class DataHandler {
                 message.setId(integer.longValue());
                 messageList.add(message);
                 databaseHelper.addMessages(messageList);
+                dhResponse.onResponse(integer);
             }
         });
     }
 
-    public void getMessages(Group group, final Response.Listener<List<Message>> dhResponse) {
-        List<Message> messages = databaseHelper.getMessages(group);
-        dhResponse.onResponse(messages);
+    public void getMessages(final Group group, final Response.Listener<List<Message>> dhResponse) {
+        List<Message> encrypted = databaseHelper.getMessages(group);
+        List<Message> decrypted = new ArrayList();
 
         int lastMessage = -1;
-        for(Message message : messages) {
+        for(Message message : encrypted) {
+            decrypted.add(message.decrypt(group.getKey()));
             lastMessage = Math.max((int)message.getId(), lastMessage);
         }
+        // respond with database while we wait for network
+        dhResponse.onResponse(decrypted);
 
         networkHelper.getMessages(group, lastMessage, new Response.Listener<List<Message>>() {
             @Override
             public void onResponse(List<Message> messages) {
-                databaseHelper.addMessages(messages);
+                List<Message> decrypted = new ArrayList<Message>();
+                for(Message message : messages) {
+                    decrypted.add(message.decrypt(group.getKey()));
+                }
                 dhResponse.onResponse(messages);
+                databaseHelper.addMessages(messages);
             }
         });
     }

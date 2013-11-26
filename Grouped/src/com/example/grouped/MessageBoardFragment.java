@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -47,7 +48,8 @@ import com.example.grouped.models.Message;
 			for(int i = 1; i <= 10; i++) {
 				Message message = new Message();
 				message.setId(i);
-				message.setMessage("Message"+i);
+				message.setMessage("MessageMessageMessageMessageMessageMessageMessageMessageMessageMessage" +
+						"MessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessage"+i);
 				message.setTimeStamp("TimeStamp"+i);
 				if (i%2 == 0) {
 					message.setMemberId(1234);
@@ -71,6 +73,25 @@ import com.example.grouped.models.Message;
 			
 			int tempId = 0;
 			for(Message message : me.getMessages()) {
+//				TextView messageBuilder = new TextView(getActivity());
+//				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+//						400,
+//						RelativeLayout.LayoutParams.WRAP_CONTENT);
+//				messageBuilder.setText(message.getMessage());
+//				messageBuilder.setId(tempId);
+//				if (tempId> 0) {
+//					params.addRule(RelativeLayout.BELOW, tempId-1);
+//				}
+//				if (group.getMemberById(message.getMemberId()).isMe()) {
+//					messageBuilder.setTextColor(Color.parseColor("#674ea7"));
+//					messageBuilder.setBackgroundResource(R.drawable.outgoing_message);
+//					params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//				} else {
+//					messageBuilder.setTextColor(Color.parseColor("#ffffff"));
+//					messageBuilder.setBackgroundResource(R.drawable.incoming_message);
+//					params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+//				}
+//				
 				RelativeLayout messageBuilder = buildMessage(message);
 				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.WRAP_CONTENT,

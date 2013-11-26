@@ -1,6 +1,6 @@
 package com.example.grouped.network;
 
-import com.android.volley.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,7 @@ import com.example.grouped.models.Group;
 import com.example.grouped.models.Member;
 import com.example.grouped.models.Message;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,9 +32,10 @@ import org.json.JSONObject;
 public class GroupedNetworkData {
 	private static Integer ERROR = -1;
     private static GroupedNetworkData instance = null;
-    private static final String BASEURL = "http://thimmig2-box-11673.use1.actionbox.io:3000";
+    private static final String BASEURL = "https://grouped.herokuapp.com";
 
     private static RequestQueue queue;
+    private static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     private GroupedNetworkData(Context context) {
         GroupedNetworkData.queue = Volley.newRequestQueue(context);
@@ -54,13 +57,13 @@ public class GroupedNetworkData {
             Response.Listener<Group> : will be called with the group after it is recieved from server
                 use this to update database or view
      */
-    public void createGroup(Group newGroupInfo, final Response.Listener<Integer> response){
+    public void createGroup(final Group newGroupInfo, final Response.Listener<Integer> response){
         String url = BASEURL + "/groups/new";
         JSONObject params = null;
 
         try {
             // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(newGroupInfo));
+            params = new JSONObject(gson.toJson(newGroupInfo));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -69,17 +72,14 @@ public class GroupedNetworkData {
             @Override
             public void onResponse(JSONObject serverResponse) {
                 // integer id is guaranteed
-                Integer id = -1;
-				try {
-					id = serverResponse.getInt("id");
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
 
-                // call the listener passed with the integer id
-                response.onResponse(id);
-
-                Log.i("Network Grouped Data", serverResponse.toString());
+                try {
+                    if(serverResponse.has("id")) {
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else if(serverResponse.has("error")) {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+                } catch (Exception e) {}
             }
         }, new Response.ErrorListener() {
             @Override
@@ -99,7 +99,7 @@ public class GroupedNetworkData {
 
         try {
             // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(groupToJoin));
+            params = new JSONObject(gson.toJson(groupToJoin));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -108,23 +108,14 @@ public class GroupedNetworkData {
             @Override
             public void onResponse(JSONObject serverResponse) {
             	// test for error
-            	if (serverResponse.has("id")){
-            		Integer memberID = -1;
-					try {
-						memberID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+            	try {
+                    if (serverResponse.has("id")){
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else if(serverResponse.has("error")) {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+            	} catch (Exception e) {}
 
-                    // call the listener passed with the integer id
-                    response.onResponse(memberID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
-
-                Log.i("Network Grouped Data", serverResponse.toString());
             }
         }, new Response.ErrorListener() {
             @Override
@@ -137,37 +128,27 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-    public void destroyGroup(Group groupToDestroy, final Response.Listener<Integer> response){
-        String url = BASEURL + "/groups/delete";
-        JSONObject params = null;
+    public void leaveGroup(Group groupToLeave, Member me, final Response.Listener<Integer> response){
+        String url = BASEURL + "/groups/leave";
+        JSONObject params = new JSONObject();
 
         try {
-            // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(groupToDestroy));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            params.put("group_id", groupToLeave.getId());
+            params.put("member_id", me.getId());
+        } catch(Exception e) {}
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject serverResponse) {
-            	if (serverResponse.has("id")){
-            		Integer groupID = -1;
-					try {
-						groupID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+            	try{
+                    if (serverResponse.has("id")){
+                        response.onResponse(serverResponse.getInt("id"));
+                    }
+                    else {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+                } catch(Exception e){}
 
-                    // call the listener passed with the integer id
-                    response.onResponse(groupID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
-
-                Log.i("Network Grouped Data", serverResponse.toString());
             }
         }, new Response.ErrorListener() {
             @Override
@@ -180,13 +161,13 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-    public void checkin(Group groupToDestroy, final Response.Listener<Integer> response){
+    public void sendCheckin(Member me, final Response.Listener<Integer> response){
         String url = BASEURL + "/checkins/new";
         JSONObject params = null;
 
         try {
             // turn the group info provided into a json object
-            params = new JSONObject(new Gson().toJson(groupToDestroy));
+            params = new JSONObject(gson.toJson(me));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -194,23 +175,13 @@ public class GroupedNetworkData {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject serverResponse) {
-            	if (serverResponse.has("id")){
-            		Integer memberID = - 1;
-					try {
-						memberID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-                    // call the listener passed with the integer id
-                    response.onResponse(memberID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
-
-                Log.i("Network Grouped Data", serverResponse.toString());
+            	try {
+                    if(serverResponse.has("id")) {
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else if(serverResponse.has("error")) {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+            	} catch (Exception e) {}
             }
         }, new Response.ErrorListener() {
             @Override
@@ -223,32 +194,29 @@ public class GroupedNetworkData {
         GroupedNetworkData.queue.add(jsObjRequest);
     }
 
-	public void checkinsGet(Group groupToCheckinWith, Member member, final Response.Listener<List<Member>> response){
+	public void getCheckins(Group group, Integer lastCheckin, final Response.Listener<List<Member>> response){
 	    String url = BASEURL + "/checkins/get";
-	    JSONObject params = null;
+		Map<String, Integer> checkinsGetArgs = new HashMap();
+		checkinsGetArgs.put("group_id", group.getId().intValue());
+		checkinsGetArgs.put("checkin_id", lastCheckin);
+        url += toUrlParams(checkinsGetArgs);
 	
-	    // turn the group info provided into a json object
-		Map<String, Long> checkinsGetArgs = new HashMap<String, Long>();
-		checkinsGetArgs.put("group_id", groupToCheckinWith.getId());
-		checkinsGetArgs.put("checkin_id", (long) member.getLastCheckin());
-		params = new JSONObject(checkinsGetArgs);
-	
-	    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+	    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 	        @Override
 	        public void onResponse(JSONObject serverResponse) {
-	        	List<Member> membersList = new ArrayList<Member>();
-	        	if (serverResponse.has("checkins")){
-	        		Member[] members = new Gson().fromJson(serverResponse.toString(), Member[].class);
-	        		membersList.addAll(Arrays.asList(members));
-	
-	                // call the listener passed with the integer id
-	                response.onResponse(membersList);
-	        	}
-	        	else {
-	        		response.onResponse(null);
-	        	}
-	
-	            Log.i("Network Grouped Data", serverResponse.toString());
+                List<Member> membersList = new ArrayList<Member>();
+                Member[] members = new Member[0];
+                try {
+                    Log.e("Grouped Network", serverResponse.toString());
+                    members = gson.fromJson(serverResponse.getJSONArray("checkins").toString(), Member[].class);
+                } catch (Exception e) {
+
+                }
+
+                membersList.addAll(Arrays.asList(members));
+
+                // call the listener passed with the integer id
+                response.onResponse(membersList);
 	        }
 	    }, new Response.ErrorListener() {
 	        @Override
@@ -261,39 +229,27 @@ public class GroupedNetworkData {
 	    GroupedNetworkData.queue.add(jsObjRequest);
 	}
 	
-	public void newMessage(Message messageToSend, 
-							final Response.Listener<Integer> response){
+	public void sendMessage(Message messageToSend,
+                            final Response.Listener<Integer> response){
 	    String url = BASEURL + "/messages/new";
-	    JSONObject params = null;
+	    JSONObject params = new JSONObject();
 	
 	    try {
-	        // turn the message provided into a json object
-	    	params = new JSONObject(new Gson().toJson(messageToSend));
-	    } catch (JSONException e) {
-	        e.printStackTrace();
-	    }
+	        params.put("id", messageToSend.getMemberId());
+            params.put("message", messageToSend.getMessage());
+	    } catch (Exception e) { }
 	
 	    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
 	        @Override
 	        public void onResponse(JSONObject serverResponse) {
-	        	// check for error
-            	if (serverResponse.has("id")){
-            		Integer messageID = -1;
-					try {
-						messageID = serverResponse.getInt("id");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-                    // call the listener passed with the integer id
-                    response.onResponse(messageID);
-            	}
-            	else {
-            		response.onResponse(ERROR);
-            	}
-	
-	            Log.i("Network Grouped Data", serverResponse.toString());
+                try {
+                    // check for error
+                    if (serverResponse.has("id")){
+                        response.onResponse(serverResponse.getInt("id"));
+                    } else {
+                        response.onResponse(serverResponse.getInt("error"));
+                    }
+                } catch (Exception e) {}
 	        }
 	    }, new Response.ErrorListener() {
 	        @Override
@@ -306,33 +262,28 @@ public class GroupedNetworkData {
 	    GroupedNetworkData.queue.add(jsObjRequest);
 	}
 	
-	public void getMessages(Group group, Message lastMessage,
+	public void getMessages(Group group, Integer lastMessage,
 			final Response.Listener<List<Message>> response){
-		String url = BASEURL + "/messages/get";
-		JSONObject params = null;
+
+        String url = BASEURL + "/messages/get";
+        Map<String, Integer> checkinsGetArgs = new HashMap();
+        checkinsGetArgs.put("group_id", group.getId().intValue());
+        checkinsGetArgs.put("message_id", lastMessage);
+        url += toUrlParams(checkinsGetArgs);
 		
-		Map<String, Long> getMessageArgs = new HashMap<String, Long>();
-		getMessageArgs.put("group_id", group.getId());
-		// TODO: checkinsGetArgs.put("message_id", message.getLastID());
-		
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject serverResponse) {
-				// check for error
-				List<Message> messagesList = new ArrayList<Message>();
+				List<Message> messageList = new ArrayList();
+                Message[] messages = new Message[0];
+                try {
+                    messages = gson.fromJson(serverResponse.getJSONArray("messages").toString(), Message[].class);
+                } catch (Exception e) {}
 
-				if (serverResponse.has("checkins")){
-	        		Message[] messages = new Gson().fromJson(serverResponse.toString(), Message[].class);
-	        		messagesList.addAll(Arrays.asList(messages));
-	
-	                // call the listener passed with the integer id
-	                response.onResponse(messagesList);
-	        	}
-	        	else {
-	        		response.onResponse(null);
-	        	}
-			
-				Log.i("Network Grouped Data", serverResponse.toString());
+                messageList.addAll(Arrays.asList(messages));
+
+                // call the listener passed with the integer id
+                response.onResponse(messageList);
 			}
 		}, new Response.ErrorListener() {
 			@Override
@@ -343,5 +294,14 @@ public class GroupedNetworkData {
 		
 			// fire our request
 			GroupedNetworkData.queue.add(jsObjRequest);
-		}
+	}
+
+    private String toUrlParams(Map<String, Integer> params) {
+        String paramString = "?";
+        for(Map.Entry<String, Integer> param : params.entrySet()) {
+            paramString += URLEncoder.encode(param.getKey()) + "=" + URLEncoder.encode(param.getValue().toString()) + "&";
+        }
+        return paramString;
+    }
+
 }

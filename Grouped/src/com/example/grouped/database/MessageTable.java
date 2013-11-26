@@ -13,7 +13,7 @@ public class MessageTable {
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_MEMBER_ID = "member_id";
     public static final String COLUMN_MESSAGE = "message";
-    public static final String COLUMN_TIMESTAMP = "timestamp";
+    public static final String COLUMN_TIMESTAMP = "message_time";
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
@@ -21,7 +21,7 @@ public class MessageTable {
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_MEMBER_ID + " integer not null, "
             + COLUMN_MESSAGE + " text not null, "
-            + COLUMN_TIMESTAMP + "text not null);";
+            + COLUMN_TIMESTAMP + " text default current_timestamp);";
 
     public static void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);

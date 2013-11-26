@@ -28,7 +28,7 @@
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCb1R0P7s34EeanI9MdgU_ec6Wgi9al1Vc" />
+            android:value="AIzaSyCp89VZT9XWRKgYXZirkv5AaOtLlqsxY0g" />
 
         <activity
             android:name="com.example.grouped.StartUp"
